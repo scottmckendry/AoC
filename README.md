@@ -7,13 +7,13 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 <!-- 2022TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | 992µs | 751µs | ⭐⭐ |
-| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | 1.077ms | 1.04ms | ⭐⭐ |
-| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | 1.386ms | 997µs | ⭐⭐ |
-| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | 2.088ms | 2.049ms | ⭐⭐ |
-| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | 2.144ms | 1.856ms | ⭐⭐ |
-| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | 1.034ms | 3.906ms | ⭐⭐ |
-| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | 981µs | 831µs | ⭐⭐ |
-| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | 1.086ms | 2.795ms | ⭐⭐ |
+| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | 169µs | 155µs | ⭐⭐ |
+| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | 253µs | 216µs | ⭐⭐ |
+| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | 239µs | 140µs | ⭐⭐ |
+| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | 647µs | 644µs | ⭐⭐ |
+| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | 724µs | 778µs | ⭐⭐ |
+| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | 279µs | 1.995ms | ⭐⭐ |
+| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | 162µs | 133µs | ⭐⭐ |
+| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | 212µs | 1.344ms | ⭐⭐ |
 
 <!-- 2022TableEnd -->
