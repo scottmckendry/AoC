@@ -1,0 +1,17 @@
+name: Generate Statistics Tables for Readme
+on: push
+
+jobs:
+  statistics-2022:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: ./2022
+    steps:
+      - uses: actions/checkout@v4
+      - run: go build
+      - run: ./aoc
+      
+      - uses: stefanzweifel/git-auto-commit-action@v5
