@@ -3,6 +3,10 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 
 ![img](https://media.tenor.com/0hKphDvj4QAAAAAC/grinch-waiting-grinch.gif)
 
+> [!NOTE]
+> Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/readmeStats.yml) and are not indicative of the performance of the code on your machine.
+> The action uses the `ubuntu-latest` image, and runs each solution 100 times to get an average. This is by no means a perfect benchmark, so take the results below with a grain of salt.
+
 ## 2022
 <!-- 2022TableStart -->
 | Day | Part 1 | Part 2 | Stars |
