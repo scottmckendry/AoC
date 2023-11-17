@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 
 	"aoc2022/utils"
 )
@@ -29,18 +30,48 @@ var solutions = map[string]func(){
 }
 
 func main() {
-	benchmark := flag.Bool("benchmark", false, "Run benchmarks")
+	benchmark := flag.Bool(
+		"benchmark",
+		false,
+		"Run benchmarks. When used with the -solution flag, it will only run the benchmark for that solution. If no solution is specified, it will run all benchmarks and update the README.md",
+	)
+	solution := flag.String("solution", "", "Run a specific solution (e.g. 01P1)")
 	flag.Parse()
 
-	if !*benchmark {
-		for _, solution := range solutions {
-			utils.Benchmark(solution)
-		}
+	// If no flags are set, print the usage and exit
+	if !*benchmark && *solution == "" {
+		flag.Usage()
+		os.Exit(1)
+	}
+
+	// If the benchmark flag is set, run all solutions and update the readme
+	if *benchmark && *solution == "" {
+		updateReadme()
 		os.Exit(0)
 	}
 
-	// Run the full benchark suite and update the README
-	updateReadme()
+	var selectedSolution func()
+	for name, solutionFunc := range solutions {
+		if strings.ToUpper(*solution) == strings.Split(name, ":")[0] {
+			selectedSolution = solutionFunc
+			break
+		}
+	}
+
+	if selectedSolution == nil {
+		fmt.Printf("Solution %s not found\n", *solution)
+		os.Exit(1)
+	}
+
+	// If the benchmark flag is set, wrap the solution in a benchmark
+	if *benchmark {
+		utils.Benchmark(selectedSolution)
+		os.Exit(0)
+	}
+
+	// Finally, run the solution on it's own
+	selectedSolution()
+	os.Exit(0)
 }
 
 func updateReadme() {
