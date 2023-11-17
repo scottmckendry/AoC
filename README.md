@@ -1,7 +1,8 @@
 # Advent of Code 📆
 All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, written in Go. Possibly the only thing I will ever get into the Christmas spirit for 🎄
 
-![img](https://media.tenor.com/0hKphDvj4QAAAAAC/grinch-waiting-grinch.gif)
+![grinch](https://github.com/scottmckendry/AoC/assets/39483124/def61fe9-d27c-4440-b033-4fb7630306e0)
+
 
 > [!NOTE]
 > Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/readmeStats.yml) and are not indicative of the performance of the code on your machine.
