@@ -1,7 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
 	"strconv"
 
 	"aoc2022/utils"
@@ -27,10 +29,17 @@ var solutions = map[string]func(){
 }
 
 func main() {
-	for _, solution := range solutions {
-		utils.Benchmark(solution)
+	benchmark := flag.Bool("benchmark", false, "Run benchmarks")
+	flag.Parse()
+
+	if !*benchmark {
+		for _, solution := range solutions {
+			utils.Benchmark(solution)
+		}
+		os.Exit(0)
 	}
 
+	// Run the full benchark suite and update the README
 	updateReadme()
 }
 
