@@ -13,7 +13,7 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 <!-- 2023TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Placeholder](https://adventofcode.com/2023/day/1) | 1.075ms | 1.079ms | ⭐⭐ |
+| [Day 1: Placeholder](https://adventofcode.com/2023/day/1) | 1.075ms | 1.072ms | ⭐⭐ |
 
 <!-- 2023TableEnd -->
 
@@ -21,13 +21,13 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 <!-- 2022TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | 154µs | 204µs | ⭐⭐ |
-| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | 254µs | 251µs | ⭐⭐ |
-| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | 274µs | 156µs | ⭐⭐ |
-| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | 743µs | 696µs | ⭐⭐ |
-| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | 777µs | 749µs | ⭐⭐ |
-| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | 359µs | 2.103ms | ⭐⭐ |
-| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | 210µs | 156µs | ⭐⭐ |
-| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | 257µs | 1.325ms | ⭐⭐ |
+| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | 190µs | 248µs | ⭐⭐ |
+| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | 238µs | 166µs | ⭐⭐ |
+| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | 236µs | 125µs | ⭐⭐ |
+| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | 743µs | 775µs | ⭐⭐ |
+| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | 702µs | 722µs | ⭐⭐ |
+| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | 304µs | 2.132ms | ⭐⭐ |
+| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | 178µs | 140µs | ⭐⭐ |
+| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | 229µs | 1.333ms | ⭐⭐ |
 
 <!-- 2022TableEnd -->
