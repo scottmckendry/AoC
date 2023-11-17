@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"aoc/utils"
+	"aoc2022/utils"
 )
 
 func D06P2() {

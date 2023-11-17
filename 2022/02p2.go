@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"aoc/utils"
+	"aoc2022/utils"
 )
 
 func D02P2() {
