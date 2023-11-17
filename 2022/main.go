@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"aoc/utils"
+	"aoc2022/utils"
 )
 
 var solutions = map[string]func(){

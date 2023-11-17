@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"aoc/utils"
+	"aoc2022/utils"
 )
 
 func D01P1() {

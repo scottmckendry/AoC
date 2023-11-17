@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"aoc/utils"
+	"aoc2022/utils"
 )
 
 func D05P1() {

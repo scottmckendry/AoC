@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"aoc/utils"
+	"aoc2022/utils"
 )
 
 func D04P2() {
