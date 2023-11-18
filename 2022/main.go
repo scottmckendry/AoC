@@ -27,6 +27,7 @@ var solutions = map[string]func(){
 	"07P2:No Space Left On Device": D07P2,
 	"08P1:Treetop Tree House":      D08P1,
 	"08P2:Treetop Tree House":      D08P2,
+	"09P1:Rope Bridge":             D09P1,
 }
 
 func main() {
