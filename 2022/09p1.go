@@ -4,18 +4,27 @@ import (
 	"fmt"
 	"math"
 	"strconv"
-	"strings"
 
 	"aoc2022/utils"
 )
 
+type position struct {
+	x int
+	y int
+}
+
 func D09P1() {
 	lines := utils.ReadLines("./inputs/09.txt")
-	headPositions := []string{"0,0"}
-	tailPositions := []string{"0,0"}
+	headPositions := []position{
+		{0, 0},
+	}
+	tailPositions := []position{
+		{0, 0},
+	}
 
 	for _, line := range lines {
-		currentHeadPositionX, currentHeadPositionY := getCurrentPosition(headPositions)
+		currentHeadPositionX := headPositions[len(headPositions)-1].x
+		currentHeadPositionY := headPositions[len(headPositions)-1].y
 
 		moves, _ := strconv.Atoi(line[2:])
 
@@ -25,7 +34,7 @@ func D09P1() {
 				currentHeadPositionY++
 				headPositions = append(
 					headPositions,
-					fmt.Sprintf("%d,%d", currentHeadPositionX, currentHeadPositionY),
+					position{currentHeadPositionX, currentHeadPositionY},
 				)
 				tailPositions = updateTailPosition(headPositions, tailPositions)
 			}
@@ -34,7 +43,7 @@ func D09P1() {
 				currentHeadPositionY--
 				headPositions = append(
 					headPositions,
-					fmt.Sprintf("%d,%d", currentHeadPositionX, currentHeadPositionY),
+					position{currentHeadPositionX, currentHeadPositionY},
 				)
 				tailPositions = updateTailPosition(headPositions, tailPositions)
 			}
@@ -43,7 +52,7 @@ func D09P1() {
 				currentHeadPositionX--
 				headPositions = append(
 					headPositions,
-					fmt.Sprintf("%d,%d", currentHeadPositionX, currentHeadPositionY),
+					position{currentHeadPositionX, currentHeadPositionY},
 				)
 				tailPositions = updateTailPosition(headPositions, tailPositions)
 			}
@@ -52,7 +61,7 @@ func D09P1() {
 				currentHeadPositionX++
 				headPositions = append(
 					headPositions,
-					fmt.Sprintf("%d,%d", currentHeadPositionX, currentHeadPositionY),
+					position{currentHeadPositionX, currentHeadPositionY},
 				)
 				tailPositions = updateTailPosition(headPositions, tailPositions)
 			}
@@ -62,38 +71,20 @@ func D09P1() {
 	fmt.Printf("Tail visited %d unique positions\n", getUniquePositions(tailPositions))
 }
 
-func getCurrentPosition(positions []string) (int, int) {
-	currentPosition := positions[len(positions)-1]
-	currentPositionX, _ := strconv.Atoi(strings.Split(currentPosition, ",")[0])
-	currentPositionY, _ := strconv.Atoi(strings.Split(currentPosition, ",")[1])
+func updateTailPosition(headPositions []position, tailPositions []position) []position {
+	currentHeadPosition := headPositions[len(headPositions)-1]
+	currentTailPosition := tailPositions[len(tailPositions)-1]
 
-	return currentPositionX, currentPositionY
-
-}
-
-func getPreviousPosition(positions []string) (int, int) {
-	if len(positions) >= 2 {
-		previousPosition := positions[len(positions)-2]
-		previousPositionX, _ := strconv.Atoi(strings.Split(previousPosition, ",")[0])
-		previousPositionY, _ := strconv.Atoi(strings.Split(previousPosition, ",")[1])
-
-		return previousPositionX, previousPositionY
+	previousHeadPosition := headPositions[len(headPositions)-1]
+	if len(headPositions) >= 2 {
+		previousHeadPosition = headPositions[len(headPositions)-2]
 	}
 
-	return 0, 0
-}
-
-func updateTailPosition(headPositions []string, tailPositions []string) []string {
-	currentHeadPositionX, currentHeadPositionY := getCurrentPosition(headPositions)
-	currentTailPositionX, currentTailPositionY := getCurrentPosition(tailPositions)
-	previousHeadPositionX, previousHeadPositionY := getPreviousPosition(headPositions)
-
-	headDeltaX := int(math.Abs(float64(currentHeadPositionX - currentTailPositionX)))
-	headDeltaY := int(math.Abs(float64(currentHeadPositionY - currentTailPositionY)))
+	headDeltaX := int(math.Abs(float64(currentHeadPosition.x - currentTailPosition.x)))
+	headDeltaY := int(math.Abs(float64(currentHeadPosition.y - currentTailPosition.y)))
 
 	// No change to tail position if the head and tail are in the same position
-	if currentHeadPositionX == currentTailPositionX &&
-		currentHeadPositionY == currentTailPositionY {
+	if currentHeadPosition == currentTailPosition {
 		return tailPositions
 	}
 
@@ -106,16 +97,16 @@ func updateTailPosition(headPositions []string, tailPositions []string) []string
 	if headDeltaX > 1 || headDeltaY > 1 {
 		tailPositions = append(
 			tailPositions,
-			fmt.Sprintf("%d,%d", previousHeadPositionX, previousHeadPositionY),
+			previousHeadPosition,
 		)
 	}
 	return tailPositions
 }
 
-func getUniquePositions(positions []string) int {
-	uniquePositions := make(map[string]bool)
-	for _, position := range positions {
-		uniquePositions[position] = true
+func getUniquePositions(positions []position) int {
+	uniquePositions := make(map[position]bool)
+	for _, pos := range positions {
+		uniquePositions[pos] = true
 	}
 	return len(uniquePositions)
 }
