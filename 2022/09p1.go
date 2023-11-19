@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 
 	"aoc2022/utils"
@@ -15,98 +14,84 @@ type position struct {
 
 func D09P1() {
 	lines := utils.ReadLines("./inputs/09.txt")
-	headPositions := []position{
-		{0, 0},
-	}
-	tailPositions := []position{
-		{0, 0},
-	}
+	head := position{0, 0}
+	tail := position{0, 0}
+	tailVisited := make(map[position]bool)
 
 	for _, line := range lines {
-		currentHeadPositionX := headPositions[len(headPositions)-1].x
-		currentHeadPositionY := headPositions[len(headPositions)-1].y
-
 		moves, _ := strconv.Atoi(line[2:])
 
-		switch line[0] {
-		case 'U':
-			for i := 0; i < moves; i++ {
-				currentHeadPositionY++
-				headPositions = append(
-					headPositions,
-					position{currentHeadPositionX, currentHeadPositionY},
-				)
-				tailPositions = updateTailPosition(headPositions, tailPositions)
+		for moves > 0 {
+			switch line[0] {
+			case 'U':
+				head.y++
+			case 'D':
+				head.y--
+			case 'L':
+				head.x--
+			case 'R':
+				head.x++
 			}
-		case 'D':
-			for i := 0; i < moves; i++ {
-				currentHeadPositionY--
-				headPositions = append(
-					headPositions,
-					position{currentHeadPositionX, currentHeadPositionY},
-				)
-				tailPositions = updateTailPosition(headPositions, tailPositions)
-			}
-		case 'L':
-			for i := 0; i < moves; i++ {
-				currentHeadPositionX--
-				headPositions = append(
-					headPositions,
-					position{currentHeadPositionX, currentHeadPositionY},
-				)
-				tailPositions = updateTailPosition(headPositions, tailPositions)
-			}
-		case 'R':
-			for i := 0; i < moves; i++ {
-				currentHeadPositionX++
-				headPositions = append(
-					headPositions,
-					position{currentHeadPositionX, currentHeadPositionY},
-				)
-				tailPositions = updateTailPosition(headPositions, tailPositions)
-			}
+			moves--
+			tail = moveTail(tail, head)
+			tailVisited[tail] = true
 		}
 	}
 
-	fmt.Printf("Tail visited %d unique positions\n", getUniquePositions(tailPositions))
+	fmt.Printf("Tail visited %d unique positions\n", len(tailVisited))
 }
 
-func updateTailPosition(headPositions []position, tailPositions []position) []position {
-	currentHeadPosition := headPositions[len(headPositions)-1]
-	currentTailPosition := tailPositions[len(tailPositions)-1]
+func moveTail(tail position, head position) (newTail position) {
+	newTail = tail
+	delta := position{head.x - tail.x, head.y - tail.y}
 
-	previousHeadPosition := headPositions[len(headPositions)-1]
-	if len(headPositions) >= 2 {
-		previousHeadPosition = headPositions[len(headPositions)-2]
+	switch delta {
+	case
+		position{-1, 2},
+		position{-2, 1},
+		position{-2, 2},
+		position{0, 2},
+		position{1, 2},
+		position{2, 1},
+		position{2, 2}:
+		newTail.y++
 	}
 
-	headDeltaX := int(math.Abs(float64(currentHeadPosition.x - currentTailPosition.x)))
-	headDeltaY := int(math.Abs(float64(currentHeadPosition.y - currentTailPosition.y)))
-
-	// No change to tail position if the head and tail are in the same position
-	if currentHeadPosition == currentTailPosition {
-		return tailPositions
+	switch delta {
+	case
+		position{-1, -2},
+		position{-2, -1},
+		position{-2, -2},
+		position{0, -2},
+		position{1, -2},
+		position{2, -1},
+		position{2, -2}:
+		newTail.y--
 	}
 
-	// If delta X and Y both == 1, then the head and tail are diagonal to each other and still touching (no change to tail position)
-	if headDeltaX == 1 && headDeltaY == 1 {
-		return tailPositions
+	switch delta {
+	case
+		position{-1, -2},
+		position{-1, 2},
+		position{-2, -0},
+		position{-2, -1},
+		position{-2, -2},
+		position{-2, 1},
+		position{-2, 2}:
+		newTail.x--
 	}
 
-	// If the distance between the head and tail is greater than 1 in any direction
-	if headDeltaX > 1 || headDeltaY > 1 {
-		tailPositions = append(
-			tailPositions,
-			previousHeadPosition,
-		)
+	switch delta {
+	case
+		position{1, -2},
+		position{2, -1},
+		position{2, -2},
+		position{2, 0},
+		position{2, 1},
+		position{2, 2},
+		position{1, 2}:
+		newTail.x++
 	}
-	return tailPositions
-}
 
-func getUniquePositions(positions []position) int {
-	uniquePositions := make(map[position]bool)
-	for _, pos := range positions {
-		uniquePositions[pos] = true
-	}
-	return len(uniquePositions)
+	return
 }
