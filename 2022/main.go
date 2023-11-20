@@ -30,6 +30,7 @@ var solutions = map[string]func(){
 	"09P1:Rope Bridge":             D09P1,
 	"09P2:Rope Bridge":             D09P2,
 	"10P1: Cathode-Ray Tube":       D10P1,
+	"10P2: Cathode-Ray Tube":       D10P2,
 }
 
 func main() {
