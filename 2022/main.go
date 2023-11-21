@@ -29,8 +29,9 @@ var solutions = map[string]func(){
 	"08P2:Treetop Tree House":      D08P2,
 	"09P1:Rope Bridge":             D09P1,
 	"09P2:Rope Bridge":             D09P2,
-	"10P1: Cathode-Ray Tube":       D10P1,
-	"10P2: Cathode-Ray Tube":       D10P2,
+	"10P1:Cathode-Ray Tube":        D10P1,
+	"10P2:Cathode-Ray Tube":        D10P2,
+	"11P1:Monkey in the Middle":    D11P1,
 }
 
 func main() {
