@@ -13,7 +13,7 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 <!-- 2023TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Placeholder](https://adventofcode.com/2023/day/1) | 1.074ms | 1.073ms | ⭐⭐ |
+| [Day 1: Placeholder](https://adventofcode.com/2023/day/1) | 1.079ms | 1.071ms | ⭐⭐ |
 
 <!-- 2023TableEnd -->
 
@@ -21,15 +21,15 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 <!-- 2022TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | 186µs | 184µs | ⭐⭐ |
-| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | 211µs | 214µs | ⭐⭐ |
-| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | 345µs | 204µs | ⭐⭐ |
-| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | 742µs | 681µs | ⭐⭐ |
-| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | 715µs | 811µs | ⭐⭐ |
-| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | 498µs | 2.167ms | ⭐⭐ |
-| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | 202µs | 169µs | ⭐⭐ |
-| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | 253µs | 1.35ms | ⭐⭐ |
-| [Day 9: Rope Bridge](https://adventofcode.com/2022/day/9) | 942µs | 1.845ms | ⭐⭐ |
-| [Day 10:  Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | 36µs | 52µs | ⭐⭐ |
-
+| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | 197µs | 209µs | ⭐⭐ |
+| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | 220µs | 198µs | ⭐⭐ |
+| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | 329µs | 203µs | ⭐⭐ |
+| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | 722µs | 696µs | ⭐⭐ |
+| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | 749µs | 712µs | ⭐⭐ |
+| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | 297µs | 2.046ms | ⭐⭐ |
+| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | 172µs | 227µs | ⭐⭐ |
+| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | 217µs | 1.372ms | ⭐⭐ |
+| [Day 9: Rope Bridge](https://adventofcode.com/2022/day/9) | 935µs | 1.678ms | ⭐⭐ |
+| [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | 31µs | 47µs | ⭐⭐ |
+| [Day 11: Monkey in the Middle](https://adventofcode.com/2022/day/11) | 34µs | 
 <!-- 2022TableEnd -->
