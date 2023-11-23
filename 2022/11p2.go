@@ -7,6 +7,7 @@ import (
 )
 
 func D11P2() {
+	commonDivisor = 1
 	const rounds = 10000
 	lines := utils.ReadLines("./inputs/11.txt")
 	monkeys := parseMonkeys(lines)
