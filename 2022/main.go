@@ -32,6 +32,7 @@ var solutions = map[string]func(){
 	"10P1:Cathode-Ray Tube":        D10P1,
 	"10P2:Cathode-Ray Tube":        D10P2,
 	"11P1:Monkey in the Middle":    D11P1,
+	"11P2:Monkey in the Middle":    D11P2,
 }
 
 func main() {

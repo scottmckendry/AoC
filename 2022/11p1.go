@@ -27,13 +27,15 @@ type mokeyOperation struct {
 	value         int
 }
 
+var commonDivisor = 1
+
 func D11P1() {
 	const rounds = 20
 	lines := utils.ReadLines("./inputs/11.txt")
 	monkeys := parseMonkeys(lines)
 
 	for i := 0; i < rounds; i++ {
-		simulateRound(&monkeys)
+		simulateRound(&monkeys, true)
 	}
 
 	monkeyWithMostInspections := monkeys[0]
@@ -99,6 +101,9 @@ func parseMonkeys(lines []string) []monkey {
 			divisibleByInt, _ := strconv.Atoi(divisibleByString)
 			currentMonkey.test.divisibleBy = divisibleByInt
 
+			// Update common divisor
+			commonDivisor *= divisibleByInt
+
 		case ' ':
 			testCaseParts := strings.Split(line, " ")
 			testCaseMonkeyId, _ := strconv.Atoi(testCaseParts[len(testCaseParts)-1])
@@ -119,20 +124,20 @@ func parseMonkeys(lines []string) []monkey {
 	return monkeys
 }
 
-func simulateRound(monkeys *[]monkey) {
+func simulateRound(monkeys *[]monkey, partOne bool) {
 	for i := 0; i < len(*monkeys); i++ {
 		monkey := (*monkeys)[i]
 		// Check if monkey has items
 		if len(monkey.items) == 0 {
 			continue
 		}
-		simulateMonkeyOperations(&monkey, monkeys)
+		simulateMonkeyOperations(&monkey, monkeys, partOne)
 		// Remove all thrown items
 		(*monkeys)[i].items = []int{}
 	}
 }
 
-func simulateMonkeyOperations(selectedMonkey *monkey, allMonkeys *[]monkey) {
+func simulateMonkeyOperations(selectedMonkey *monkey, allMonkeys *[]monkey, partOne bool) {
 	resetOperationValue := false
 	for i, item := range selectedMonkey.items {
 		(*allMonkeys)[selectedMonkey.id].inspectCount++
@@ -152,7 +157,11 @@ func simulateMonkeyOperations(selectedMonkey *monkey, allMonkeys *[]monkey) {
 			selectedMonkey.operation.value = 0
 		}
 
-		selectedMonkey.items[i] = selectedMonkey.items[i] / 3
+		if partOne {
+			selectedMonkey.items[i] = selectedMonkey.items[i] / 3
+		} else {
+			selectedMonkey.items[i] %= commonDivisor
+		}
 		simulateMonkeyTest(selectedMonkey, selectedMonkey.items[i], allMonkeys)
 	}
 }

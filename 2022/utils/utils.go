@@ -87,3 +87,14 @@ func GetSolutionStatistics(solutions map[string]func()) []SolutionStatistics {
 
 	return statistics
 }
+
+func SortInts(ints []int) []int {
+	for i := 0; i < len(ints); i++ {
+		for j := i + 1; j < len(ints); j++ {
+			if ints[i] > ints[j] {
+				ints[i], ints[j] = ints[j], ints[i]
+			}
+		}
+	}
+	return ints
+}
