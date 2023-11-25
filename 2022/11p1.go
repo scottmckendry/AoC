@@ -168,18 +168,15 @@ func simulateMonkeyOperations(selectedMonkey *monkey, allMonkeys *[]monkey, part
 
 func simulateMonkeyTest(selectedMonkey *monkey, item int, allMonkeys *[]monkey) {
 	if item%selectedMonkey.test.divisibleBy == 0 {
-		for _, monkey := range *allMonkeys {
-			if monkey.id == selectedMonkey.test.monkeyWhenTrue {
-				(*allMonkeys)[monkey.id].items = append((*allMonkeys)[monkey.id].items, item)
-				break
-			}
-		}
-	} else {
-		for _, monkey := range *allMonkeys {
-			if monkey.id == selectedMonkey.test.monkeyWhenFalse {
-				(*allMonkeys)[monkey.id].items = append((*allMonkeys)[monkey.id].items, item)
-				break
-			}
-		}
+		(*allMonkeys)[selectedMonkey.test.monkeyWhenTrue].items = append(
+			(*allMonkeys)[selectedMonkey.test.monkeyWhenTrue].items,
+			item,
+		)
+		return
 	}
+
+	(*allMonkeys)[selectedMonkey.test.monkeyWhenFalse].items = append(
+		(*allMonkeys)[selectedMonkey.test.monkeyWhenFalse].items,
+		item,
+	)
 }
