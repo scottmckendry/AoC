@@ -7,8 +7,6 @@ import (
 )
 
 type node struct {
-	x              int
-	y              int
 	value          int
 	letter         string
 	visited        bool
@@ -17,41 +15,56 @@ type node struct {
 	movesFromStart int
 }
 
+type nodeCoordinate struct {
+	x int
+	y int
+}
+
 func D12P1() {
 	lines := utils.ReadLines("./inputs/12.txt")
 	hills := parseHills(lines)
 
-	queue := []*node{}
+	queue := []nodeCoordinate{}
 
 	// Append start node to queue
-	start := findStart(&hills)
+	start := findStart(hills)
 	queue = append(queue, start)
 
 	for queue != nil {
-		if queue[0].visited {
+		if hills[queue[0]].visited {
 			queue = queue[1:]
 			continue
 		}
 
-		if queue[0].end {
-			fmt.Printf("Reached end in %d moves\n", queue[0].movesFromStart)
+		if hills[queue[0]].end {
+			fmt.Printf("Reached end in %d moves\n", hills[queue[0]].movesFromStart)
 			break
 		}
 
 		neighbours := findNeighbours(&hills, queue[0])
 
 		for _, n := range neighbours {
-			updateMovesFromStart(n, queue[0])
+			value, exists := hills[n]
+
+			if exists {
+				value.movesFromStart = updateMovesFromStart(value, hills[queue[0]])
+				hills[n] = value
+			}
+
 			queue = append(queue, n)
 		}
 
-		queue[0].visited = true
+		value, exists := hills[queue[0]]
+		if exists {
+			value.visited = true
+			hills[queue[0]] = value
+		}
 		queue = queue[1:]
 	}
 }
 
-func parseHills(lines []string) []node {
-	var hills []node
+func parseHills(lines []string) map[nodeCoordinate]node {
+	hills := map[nodeCoordinate]node{}
 	maxIntValue := int(^uint(0) >> 1)
 	for y, line := range lines {
 		for x, char := range line {
@@ -68,56 +81,57 @@ func parseHills(lines []string) []node {
 				end = true
 			}
 
-			hills = append(
-				hills,
-				node{x, y, int(char), string(char), false, start, end, movesFromStart},
-			)
+			hills[nodeCoordinate{x, y}] = node{
+				value:          int(char),
+				letter:         string(char),
+				visited:        false,
+				start:          start,
+				end:            end,
+				movesFromStart: movesFromStart,
+			}
 		}
 	}
+
 	return hills
 }
 
-func findStart(hills *[]node) *node {
-	for i, hill := range *hills {
+func findStart(hills map[nodeCoordinate]node) nodeCoordinate {
+	for coordinate, hill := range hills {
 		if hill.start {
-			return &(*hills)[i]
+			return coordinate
 		}
 	}
-	return nil
+	return nodeCoordinate{}
 }
 
-func findNeighbours(hills *[]node, hill *node) []*node {
-	var neighbours []*node
-	for i, n := range *hills {
-		if n.visited {
+func findNeighbours(hills *map[nodeCoordinate]node, coordinate nodeCoordinate) []nodeCoordinate {
+	neighbours := []nodeCoordinate{}
+	posibleNeighbours := []nodeCoordinate{
+		{coordinate.x + 1, coordinate.y},
+		{coordinate.x - 1, coordinate.y},
+		{coordinate.x, coordinate.y + 1},
+		{coordinate.x, coordinate.y - 1},
+	}
+
+	currentHillValue := (*hills)[coordinate].value
+
+	for _, possibleNeighbour := range posibleNeighbours {
+		value, exists := (*hills)[possibleNeighbour]
+		if exists && value.value-currentHillValue > 1 {
 			continue
-		} else if n.value-hill.value > 1 {
-			continue
-		}
-		if len(neighbours) == 3 {
-			break
-		}
-		if hill.x+1 == n.x && hill.y == n.y {
-			neighbours = append(neighbours, &(*hills)[i])
 		}
 
-		if hill.x-1 == n.x && hill.y == n.y {
-			neighbours = append(neighbours, &(*hills)[i])
-		}
-
-		if hill.x == n.x && hill.y+1 == n.y {
-			neighbours = append(neighbours, &(*hills)[i])
-		}
-
-		if hill.x == n.x && hill.y-1 == n.y {
-			neighbours = append(neighbours, &(*hills)[i])
+		if exists && !value.visited {
+			neighbours = append(neighbours, possibleNeighbour)
 		}
 	}
+
 	return neighbours
 }
 
-func updateMovesFromStart(hill *node, currentPosition *node) {
+func updateMovesFromStart(hill node, currentPosition node) int {
 	if hill.movesFromStart > currentPosition.movesFromStart+1 {
-		hill.movesFromStart = currentPosition.movesFromStart + 1
+		return currentPosition.movesFromStart + 1
 	}
+	return hill.movesFromStart
 }
