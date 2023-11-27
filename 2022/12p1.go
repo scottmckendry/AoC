@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 
 	"aoc2022/utils"
 )
@@ -22,35 +21,33 @@ func D12P1() {
 	lines := utils.ReadLines("./inputs/12.txt")
 	hills := parseHills(lines)
 
-	path := []*node{}
+	queue := []*node{}
 
-	currentPosition := findStart(&hills)
+	// Append start node to queue
+	start := findStart(&hills)
+	queue = append(queue, start)
 
-	for !currentPosition.end {
-		neighbours := findNeighbours(&hills, currentPosition, false)
+	for queue != nil {
+		if queue[0].visited {
+			queue = queue[1:]
+			continue
+		}
+
+		if queue[0].end {
+			fmt.Printf("Reached end in %d moves\n", queue[0].movesFromStart)
+			break
+		}
+
+		neighbours := findNeighbours(&hills, queue[0])
+
 		for _, n := range neighbours {
-			updateMovesFromStart(n, currentPosition)
+			updateMovesFromStart(n, queue[0])
+			queue = append(queue, n)
 		}
 
-		currentPosition.visited = true
-		path = append(path, currentPosition)
-		previousPosition := currentPosition
-		currentPosition = selectNextNode(neighbours, currentPosition)
-
-		stepBack := 1
-		for currentPosition == previousPosition {
-			// fmt.Println("No more valid moves, returning to a visited node")
-			currentPosition = path[len(path)-stepBack]
-			previousPosition = currentPosition
-			currentPosition = selectNextNode(
-				findNeighbours(&hills, currentPosition, false),
-				currentPosition,
-			)
-			stepBack++
-		}
+		queue[0].visited = true
+		queue = queue[1:]
 	}
-
-	fmt.Printf("Moves from start: %d\n", currentPosition.movesFromStart)
 }
 
 func parseHills(lines []string) []node {
@@ -89,16 +86,15 @@ func findStart(hills *[]node) *node {
 	return nil
 }
 
-func findNeighbours(hills *[]node, hill *node, visited bool) []*node {
+func findNeighbours(hills *[]node, hill *node) []*node {
 	var neighbours []*node
 	for i, n := range *hills {
-		if !visited && n.visited {
+		if n.visited {
+			continue
+		} else if n.value-hill.value > 1 {
 			continue
 		}
-		if n.value-hill.value > 1 {
-			continue
-		}
-		if len(neighbours) == 4 {
+		if len(neighbours) == 3 {
 			break
 		}
 		if hill.x+1 == n.x && hill.y == n.y {
@@ -121,58 +117,7 @@ func findNeighbours(hills *[]node, hill *node, visited bool) []*node {
 }
 
 func updateMovesFromStart(hill *node, currentPosition *node) {
-	// Hill is too high to climb
-	if hill.value > currentPosition.value+1 {
-		return
-	}
-
 	if hill.movesFromStart > currentPosition.movesFromStart+1 {
 		hill.movesFromStart = currentPosition.movesFromStart + 1
 	}
-}
-
-func selectNextNode(neighbours []*node, currentPosition *node) *node {
-	previousPosition := currentPosition
-
-	currentPosition = nil
-
-	// fmt.Printf(
-	// 	"Previous position %d, %d, %s\n",
-	// 	previousPosition.x,
-	// 	previousPosition.y,
-	// 	previousPosition.letter,
-	// )
-
-	if len(neighbours) == 0 {
-		return previousPosition
-	}
-
-	for i, n := range neighbours {
-		// Can only climb one letter/number at a time - if the value is more than 1 higher than the previous position, it's too high to climb
-		if n.value > previousPosition.value+1 {
-			continue
-		}
-
-		_ = i
-
-		// Ideal move is to step up 1 from the previous position - the end is the highest point on the map
-		// if previousPosition.value == n.value-1 {
-		// currentPosition = neighbours[i]
-		// break
-		// }
-	}
-
-	if currentPosition == nil {
-		currentPosition = neighbours[rand.Intn(len(neighbours))]
-	}
-
-	// fmt.Printf(
-	// 	"New position %d, %d, %s is %d from start\n",
-	// 	currentPosition.x,
-	// 	currentPosition.y,
-	// 	currentPosition.letter,
-	// 	currentPosition.movesFromStart,
-	// )
-
-	return currentPosition
 }
