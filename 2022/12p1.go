@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 
 	"aoc2022/utils"
 )
@@ -21,6 +22,8 @@ func D12P1() {
 	lines := utils.ReadLines("./inputs/12.txt")
 	hills := parseHills(lines)
 
+	path := []*node{}
+
 	currentPosition := findStart(&hills)
 
 	for !currentPosition.end {
@@ -30,13 +33,20 @@ func D12P1() {
 		}
 
 		currentPosition.visited = true
+		path = append(path, currentPosition)
 		previousPosition := currentPosition
 		currentPosition = selectNextNode(neighbours, currentPosition)
 
-		if currentPosition == previousPosition {
-			fmt.Println("No more valid moves, returning to a visited node")
-			neighbours = findNeighbours(&hills, currentPosition, true)
-			currentPosition = selectNextNode(neighbours, currentPosition)
+		stepBack := 1
+		for currentPosition == previousPosition {
+			// fmt.Println("No more valid moves, returning to a visited node")
+			currentPosition = path[len(path)-stepBack]
+			previousPosition = currentPosition
+			currentPosition = selectNextNode(
+				findNeighbours(&hills, currentPosition, false),
+				currentPosition,
+			)
+			stepBack++
 		}
 	}
 
@@ -85,6 +95,9 @@ func findNeighbours(hills *[]node, hill *node, visited bool) []*node {
 		if !visited && n.visited {
 			continue
 		}
+		if n.value-hill.value > 1 {
+			continue
+		}
 		if len(neighbours) == 4 {
 			break
 		}
@@ -130,26 +143,27 @@ func selectNextNode(neighbours []*node, currentPosition *node) *node {
 	// 	previousPosition.letter,
 	// )
 
+	if len(neighbours) == 0 {
+		return previousPosition
+	}
+
 	for i, n := range neighbours {
 		// Can only climb one letter/number at a time - if the value is more than 1 higher than the previous position, it's too high to climb
 		if n.value > previousPosition.value+1 {
 			continue
 		}
 
-		// Ideal move is to step up 1 from the previous position - the end is the highest point on the map
-		if previousPosition.value == n.value-1 {
-			currentPosition = neighbours[i]
-			break
-		}
+		_ = i
 
-		// Next best move is to select the neighbour with the highest value, aiming to get as high as possible to get to the end
-		if currentPosition == nil || n.value > currentPosition.value {
-			currentPosition = neighbours[i]
-		}
+		// Ideal move is to step up 1 from the previous position - the end is the highest point on the map
+		// if previousPosition.value == n.value-1 {
+		// currentPosition = neighbours[i]
+		// break
+		// }
 	}
 
 	if currentPosition == nil {
-		return previousPosition
+		currentPosition = neighbours[rand.Intn(len(neighbours))]
 	}
 
 	// fmt.Printf(
