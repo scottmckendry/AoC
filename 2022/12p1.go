@@ -27,7 +27,11 @@ func D12P1() {
 	queue := []nodeCoordinate{}
 
 	// Append start node to queue
-	start := findStart(hills)
+	start := findStart(hills, false)
+	value, exists := hills[start]
+	if exists {
+		value.movesFromStart = 0
+	}
 	queue = append(queue, start)
 
 	for queue != nil {
@@ -41,7 +45,7 @@ func D12P1() {
 			break
 		}
 
-		neighbours := findNeighbours(&hills, queue[0])
+		neighbours := findNeighbours(&hills, queue[0], false)
 
 		for _, n := range neighbours {
 			value, exists := hills[n]
@@ -74,7 +78,6 @@ func parseHills(lines []string) map[nodeCoordinate]node {
 			if string(char) == "S" {
 				char = 'a'
 				start = true
-				movesFromStart = 0
 			}
 			if string(char) == "E" {
 				char = 'z'
@@ -95,16 +98,23 @@ func parseHills(lines []string) map[nodeCoordinate]node {
 	return hills
 }
 
-func findStart(hills map[nodeCoordinate]node) nodeCoordinate {
+func findStart(hills map[nodeCoordinate]node, reverse bool) nodeCoordinate {
 	for coordinate, hill := range hills {
-		if hill.start {
+		if hill.start && !reverse {
+			return coordinate
+		}
+		if hill.end && reverse {
 			return coordinate
 		}
 	}
 	return nodeCoordinate{}
 }
 
-func findNeighbours(hills *map[nodeCoordinate]node, coordinate nodeCoordinate) []nodeCoordinate {
+func findNeighbours(
+	hills *map[nodeCoordinate]node,
+	coordinate nodeCoordinate,
+	reverse bool,
+) []nodeCoordinate {
 	neighbours := []nodeCoordinate{}
 	posibleNeighbours := []nodeCoordinate{
 		{coordinate.x + 1, coordinate.y},
@@ -117,7 +127,11 @@ func findNeighbours(hills *map[nodeCoordinate]node, coordinate nodeCoordinate) [
 
 	for _, possibleNeighbour := range posibleNeighbours {
 		value, exists := (*hills)[possibleNeighbour]
-		if exists && value.value-currentHillValue > 1 {
+		if exists && value.value-currentHillValue > 1 && !reverse {
+			continue
+		}
+
+		if exists && currentHillValue-value.value > 1 && reverse {
 			continue
 		}
 

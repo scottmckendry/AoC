@@ -34,6 +34,7 @@ var solutions = map[string]func(){
 	"11P1:Monkey in the Middle":    D11P1,
 	"11P2:Monkey in the Middle":    D11P2,
 	"12P1:Hill Climbing Algorithm": D12P1,
+	"12P2:Hill Climbing Algorithm": D12P2,
 }
 
 func main() {
