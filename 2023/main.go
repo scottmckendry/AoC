@@ -72,16 +72,18 @@ func updateReadme() {
 		dayInt, _ := strconv.Atoi(statistic.Day)
 		if statistic.Part == "1" {
 			readmeTable += fmt.Sprintf(
-				"| [Day %d: %s](https://adventofcode.com/2023/day/%d) | %s | ",
+				"| [Day %d: %s](https://adventofcode.com/2023/day/%d) | [%s](2023/%s.go) | ",
 				dayInt,
 				statistic.Name,
 				dayInt,
 				statistic.ExecutionTime,
+				statistic.Day+"p1",
 			)
 		} else {
 			readmeTable += fmt.Sprintf(
-				"%s | ⭐⭐ |\n",
+				"[%s](2023/%s.go) | ⭐⭐ |\n",
 				statistic.ExecutionTime,
+				statistic.Day+"p2",
 			)
 		}
 	}
