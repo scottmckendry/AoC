@@ -11,8 +11,8 @@ import (
 )
 
 var solutions = map[string]func(){
-	"01P1:Placeholder": D01P1,
-	"01P2:Placeholder": D01P2,
+	"01P1:Trebuchet?!": D01P1,
+	"01P2:Trebuchet?!": D01P2,
 }
 
 func main() {
