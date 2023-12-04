@@ -17,6 +17,8 @@ var solutions = map[string]func(){
 	"02P2:Cube Conundrum": D02P2,
 	"03P1:Gear Ratios":    D03P1,
 	"03P2:Gear Ratios":    D03P2,
+	"04P1:Scratchcards":   D04P1,
+	"04P2:Scratchcards":   D04P2,
 }
 
 func main() {
