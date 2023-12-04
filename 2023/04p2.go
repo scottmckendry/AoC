@@ -22,7 +22,7 @@ func D04P2() {
 			copyIndex := 1
 			card := cards[i]
 			for i := 0; i < card.matchingNumbers; i++ {
-				if card.cardId+copyIndex < len(cards) {
+				if card.cardId+copyIndex <= len(cards) {
 					cards[card.cardId+copyIndex-1].cardCopies++
 				}
 				copyIndex++
