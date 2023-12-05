@@ -11,14 +11,15 @@ import (
 )
 
 var solutions = map[string]func(){
-	"01P1:Trebuchet?!":    D01P1,
-	"01P2:Trebuchet?!":    D01P2,
-	"02P1:Cube Conundrum": D02P1,
-	"02P2:Cube Conundrum": D02P2,
-	"03P1:Gear Ratios":    D03P1,
-	"03P2:Gear Ratios":    D03P2,
-	"04P1:Scratchcards":   D04P1,
-	"04P2:Scratchcards":   D04P2,
+	"01P1:Trebuchet?!":                     D01P1,
+	"01P2:Trebuchet?!":                     D01P2,
+	"02P1:Cube Conundrum":                  D02P1,
+	"02P2:Cube Conundrum":                  D02P2,
+	"03P1:Gear Ratios":                     D03P1,
+	"03P2:Gear Ratios":                     D03P2,
+	"04P1:Scratchcards":                    D04P1,
+	"04P2:Scratchcards":                    D04P2,
+	"05P1:If You Give a Seed A Fertilizer": D05P1,
 }
 
 func main() {
