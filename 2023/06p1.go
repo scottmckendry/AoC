@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 
 	"aoc2023/utils"
@@ -67,15 +68,11 @@ func parseBoatRaces(lines []string) []boatRace {
 }
 
 func findBoatRaceWins(boatRace boatRace) int {
-	winningScenarios := 0
-	currentRecord := boatRace.distanceRecord
+	t := boatRace.time
+	d := boatRace.distanceRecord
 
-	for i := 0; i < boatRace.time; i++ {
-		newRecord := i * (boatRace.time - i)
-		if newRecord > currentRecord {
-			winningScenarios++
-		}
-	}
+	t1 := (t - int(math.Sqrt(float64(t*t-4*d)))) / 2
+	t2 := (t + int(math.Sqrt(float64(t*t-4*d)))) / 2
 
-	return winningScenarios
+	return t2 - t1 + 1
 }
