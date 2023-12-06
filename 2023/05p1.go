@@ -25,27 +25,13 @@ func D05P1() {
 	seeds := parseAlmanacSeeds(lines)
 	maps := parseAlmanacMaps(lines)
 
-	// fmt.Printf("Seeds: %v\n", seeds)
-
-	// for _, almanacMap := range maps {
-	// 	fmt.Printf("Map: %s\n", almanacMap.mapName)
-	// 	for _, almanacMapRange := range almanacMap.ranges {
-	// 		fmt.Printf(
-	// 			"Destination: %d, Source: %d, Length: %d\n",
-	// 			almanacMapRange.destinationRangeStart,
-	// 			almanacMapRange.sourceRangeStart,
-	// 			almanacMapRange.rangeLength,
-	// 		)
-	// 	}
-	// }
-
 	for _, almanacMap := range maps {
 		seeds = applyAlmanacMap(seeds, almanacMap)
 	}
 
 	lowestLocationNumber := int(^uint(0) >> 1)
 	for _, seed := range seeds {
-		if seed[len(seed)-1] < lowestLocationNumber {
+		if seed[len(seed)-1] < lowestLocationNumber && lowestLocationNumber != 0 {
 			lowestLocationNumber = seed[len(seed)-1]
 		}
 	}
@@ -96,12 +82,14 @@ func parseAlmanacMaps(lines []string) []alamanacMap {
 
 		currentMap.ranges = append(currentMap.ranges, almanacMapRange)
 	}
+
+	almanacMaps = append(almanacMaps, currentMap)
 	return almanacMaps
 }
 
 func applyAlmanacMap(seeds [][]int, almanacMap alamanacMap) [][]int {
+	fmt.Printf("Applying map %s...\n", almanacMap.mapName)
 	startingLength := len(seeds[0])
-	// fmt.Printf("Applying map: %s\n", almanacMap.mapName)
 	for i, seed := range seeds {
 		for _, almanacMapRange := range almanacMap.ranges {
 			sourceValue := seed[len(seed)-1]
@@ -110,14 +98,12 @@ func applyAlmanacMap(seeds [][]int, almanacMap alamanacMap) [][]int {
 				sourceValue < almanacMapRange.sourceRangeStart+almanacMapRange.rangeLength {
 				diff := almanacMapRange.sourceRangeStart - almanacMapRange.destinationRangeStart
 				seeds[i] = append(seed, sourceValue-diff)
-				// fmt.Printf("Value %d maps to %d\n", sourceValue, sourceValue-diff)
 			}
 		}
 
 		// If no match is found, append the last value
 		if len(seeds[i]) < startingLength+1 {
 			seeds[i] = append(seed, seed[len(seed)-1])
-			// fmt.Printf("Value %d maps to %d\n", seed[len(seed)-1], seed[len(seed)-1])
 		}
 	}
 
