@@ -20,6 +20,7 @@ func D06P2() {
 func parseBoatRacesPartTwo(lines []string) boatRace {
 
 	race := boatRace{}
+	// Parse time
 	timeDigitString := ""
 	for _, timeDigit := range lines[0] {
 		if timeDigit >= '0' && timeDigit <= '9' {
@@ -30,6 +31,7 @@ func parseBoatRacesPartTwo(lines []string) boatRace {
 	race.time, _ = strconv.Atoi(timeDigitString)
 
 	distanceDigitString := ""
+	// Parse distance
 	for _, distanceDigit := range lines[1] {
 		if distanceDigit >= '0' && distanceDigit <= '9' {
 			distanceDigitString += string(distanceDigit)

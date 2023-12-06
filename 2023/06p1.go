@@ -30,6 +30,8 @@ func parseBoatRaces(lines []string) []boatRace {
 	boatRaces := []boatRace{}
 	timeDigitString := ""
 	currentBoatRace := boatRace{}
+
+	// Parse times
 	for _, timeDigit := range lines[0] {
 		if timeDigit >= '0' && timeDigit <= '9' {
 			timeDigitString += string(timeDigit)
@@ -47,6 +49,8 @@ func parseBoatRaces(lines []string) []boatRace {
 
 	distanceDigitString := ""
 	boatRaceIndex := 0
+
+	// Parse distances
 	for _, distanceDigit := range lines[1] {
 		if distanceDigit >= '0' && distanceDigit <= '9' {
 			distanceDigitString += string(distanceDigit)
@@ -71,8 +75,10 @@ func findBoatRaceWins(boatRace boatRace) int {
 	t := boatRace.time
 	d := boatRace.distanceRecord
 
+	// Get the minimum and maximum hold times to improve upon d (distanceRecord)
 	t1 := (t - int(math.Sqrt(float64(t*t-4*d)))) / 2
 	t2 := (t + int(math.Sqrt(float64(t*t-4*d)))) / 2
 
+	// the difference between the two represents ALL the possible hold times that result in a win
 	return t2 - t1 + 1
 }
