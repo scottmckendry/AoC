@@ -22,6 +22,9 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 | [Day 7: Camel Cards](https://adventofcode.com/2023/day/7) | [4.728ms](2023/07p1.go) | [4.801ms](2023/07p2.go) | ⭐⭐ |
 
 <!-- 2023TableEnd -->
+**TODO:**
+- Improve Day 5 p2 performance. The current implementation takes 1.5 hours to run on my machine so I cannot benchmark with the GitHub action. The statistic above is referencing a different function.
+- Improve sorting algorithm for Day 7. I'm sure this can be faster.
 
 ## 2022
 <!-- 2022TableStart -->
