@@ -23,6 +23,8 @@ var solutions = map[string]func(){
 	"05P2:If You Give a Seed A Fertilizer": D05P2temp, // Need to revisit this one. Currently takes and hour and a half to run so can't benchmark it
 	"06P1:Wait For It":                     D06P1,
 	"06P2:Wait For It":                     D06P2,
+	"07P1:Camel Cards":                     D07P1,
+	"07P2:Camel Cards":                     D07P2,
 }
 
 func main() {
