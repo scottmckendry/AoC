@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"strconv"
 
 	"aoc2023/utils"
@@ -63,26 +64,8 @@ func rankCardHands(cards []cardHand, partTwo bool) []cardHand {
 		cards[i].score = scoreCardHand(card, partTwo)
 	}
 
-	// Sort by score, then by cards in the hand
-	for i := 0; i < len(cards); i++ {
-		for j := i + 1; j < len(cards); j++ {
-			if cards[i].score == cards[j].score {
-				for k := 0; k < len(cards[i].cards); k++ {
-					if cards[i].cards[k] > cards[j].cards[k] {
-						cards[i], cards[j] = cards[j], cards[i]
-						break
-					}
-
-					if cards[i].cards[k] < cards[j].cards[k] {
-						break
-					}
-				}
-			}
-			if cards[i].score > cards[j].score {
-				cards[i], cards[j] = cards[j], cards[i]
-			}
-		}
-	}
+	// Quick sort the cards by score
+	cards = quickSortCardHands(cards)
 
 	return cards
 }
@@ -109,19 +92,56 @@ func scoreCardHand(card cardHand, partTwo bool) int {
 		}
 	}
 
-	totalScore := 0
+	matchScore := 0
 	for _, count := range cardMatches {
 		switch count {
 		case 5:
-			totalScore += 10
+			matchScore += 10
 		case 4:
-			totalScore += 8
+			matchScore += 8
 		case 3:
-			totalScore += 5
+			matchScore += 5
 		case 2:
-			totalScore += 2
+			matchScore += 2
 		}
 	}
 
+	// Score the cards in the hand individually
+	totalScoreString := strconv.Itoa(matchScore)
+	for _, card := range card.cards {
+		if card > 9 {
+			totalScoreString += strconv.Itoa(card)
+		} else {
+			totalScoreString += "0" + strconv.Itoa(card)
+		}
+	}
+
+	totalScore, _ := strconv.Atoi(totalScoreString)
+
 	return totalScore
+}
+
+func quickSortCardHands(hands []cardHand) []cardHand {
+	if len(hands) < 2 {
+		return hands
+	}
+
+	left, right := 0, len(hands)-1
+	pivot := rand.Int() % len(hands)
+
+	hands[pivot], hands[right] = hands[right], hands[pivot]
+
+	for i := range hands {
+		if hands[i].score < hands[right].score {
+			hands[left], hands[i] = hands[i], hands[left]
+			left++
+		}
+	}
+
+	hands[left], hands[right] = hands[right], hands[left]
+
+	quickSortCardHands(hands[:left])
+	quickSortCardHands(hands[left+1:])
+
+	return hands
 }
