@@ -87,3 +87,22 @@ func GetSolutionStatistics(solutions map[string]func()) []SolutionStatistics {
 
 	return statistics
 }
+
+func FindLowestCommonMultiple(ints []int) int {
+	result := ints[0]
+	for i := 1; i < len(ints); i++ {
+		result = lowestCommonMultiple(result, ints[i])
+	}
+	return result
+}
+
+func lowestCommonMultiple(a, b int) int {
+	return a * b / greatestCommonDivisor(a, b)
+}
+
+func greatestCommonDivisor(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}

@@ -25,6 +25,8 @@ var solutions = map[string]func(){
 	"06P2:Wait For It":                     D06P2,
 	"07P1:Camel Cards":                     D07P1,
 	"07P2:Camel Cards":                     D07P2,
+	"08P1:Haunted Wasteland":               D08P1,
+	"08P2:Haunted Wasteland":               D08P2,
 }
 
 func main() {
