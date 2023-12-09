@@ -14,7 +14,7 @@ func D09P1() {
 
 	nextValueSum := 0
 	for _, line := range oasisHistory {
-		nextValue := predictNextOasisValue(line)
+		nextValue := predictNextOasisValue(line, false)
 		nextValueSum += nextValue
 	}
 
@@ -35,7 +35,7 @@ func parseOasisHistory(lines []string) [][]int {
 	return oasisHistory
 }
 
-func predictNextOasisValue(history []int) int {
+func predictNextOasisValue(history []int, partTwo bool) int {
 	historyDiffs := []int{}
 	for i, value := range history {
 		if i == 0 {
@@ -50,8 +50,14 @@ func predictNextOasisValue(history []int) int {
 	}
 
 	if historyTotal == 0 {
+		if partTwo {
+			return history[0]
+		}
 		return history[len(history)-1]
 	}
 
-	return predictNextOasisValue(historyDiffs) + history[len(history)-1]
+	if partTwo {
+		return history[0] - predictNextOasisValue(historyDiffs, partTwo)
+	}
+	return predictNextOasisValue(historyDiffs, partTwo) + history[len(history)-1]
 }
