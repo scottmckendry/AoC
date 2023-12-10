@@ -29,6 +29,7 @@ var solutions = map[string]func(){
 	"08P2:Haunted Wasteland":               D08P2,
 	"09P1:Mirage Maintenance":              D09P1,
 	"09P2:Mirage Maintenance":              D09P2,
+	"10P1:Pipe Maze":                       D10P1,
 }
 
 func main() {
