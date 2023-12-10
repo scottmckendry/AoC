@@ -25,8 +25,23 @@ func D05P1() {
 	seeds := parseAlmanacSeeds(lines)
 	maps := parseAlmanacMaps(lines)
 
+	ranges := []int{}
+	for i := 0; i < len(seeds); i++ {
+		ranges = append(ranges, 1)
+	}
+
 	for _, almanacMap := range maps {
-		seeds = applyAlmanacMap(seeds, almanacMap)
+		mappedSeeds := []int{}
+		mappedRanges := []int{}
+
+		for i, seed := range seeds {
+			newSeeds, newRanges := applyAlmanacMap(seed, ranges[i], almanacMap)
+			mappedSeeds = append(mappedSeeds, newSeeds...)
+			mappedRanges = append(mappedRanges, newRanges...)
+		}
+
+		seeds = mappedSeeds
+		ranges = mappedRanges
 	}
 
 	lowestLocationNumber := int(^uint(0) >> 1)
@@ -48,7 +63,6 @@ func parseAlmanacSeeds(lines []string) []int {
 		seeds = append(seeds, seedNumber)
 	}
 
-	fmt.Println("Seed numbers: ", seeds)
 	return seeds
 }
 
@@ -85,25 +99,47 @@ func parseAlmanacMaps(lines []string) []alamanacMap {
 	return almanacMaps
 }
 
-func applyAlmanacMap(seeds []int, almanacMap alamanacMap) []int {
-	fmt.Printf("Applying map %s...\n", almanacMap.mapName)
-	newSeeds := []int{}
-	for i, seed := range seeds {
-		sourceValue := seed
-		for _, almanacMapRange := range almanacMap.ranges {
+func applyAlmanacMap(seedStart int, seedRange int, almanacMap alamanacMap) ([]int, []int) {
+	newSeedStarts := []int{}
+	newSeedRanges := []int{}
 
-			if sourceValue >= almanacMapRange.sourceRangeStart &&
-				sourceValue < almanacMapRange.sourceRangeStart+almanacMapRange.rangeLength {
-				diff := almanacMapRange.sourceRangeStart - almanacMapRange.destinationRangeStart
-				newSeeds = append(newSeeds, sourceValue-diff)
+	for _, almanacMapRange := range almanacMap.ranges {
+		if seedStart >= almanacMapRange.sourceRangeStart &&
+			seedStart < almanacMapRange.sourceRangeStart+almanacMapRange.rangeLength {
+			difference := almanacMapRange.sourceRangeStart - almanacMapRange.destinationRangeStart
+			newSeedStart := seedStart - difference
+			newSeedStarts = append(newSeedStarts, newSeedStart)
+
+			// If the full range of seeds is not contained within the current map range, we need to split the range
+			if seedStart+seedRange > almanacMapRange.sourceRangeStart+almanacMapRange.rangeLength {
+				// Append the range of seeds that is contained within the current map range
+				newSeedRanges = append(
+					newSeedRanges,
+					almanacMapRange.sourceRangeStart+almanacMapRange.rangeLength-newSeedStart,
+				)
+
+				// Check what seeds are not contained within the current map range and map them recursively
+				unmappedSeedStart := almanacMapRange.sourceRangeStart + almanacMapRange.rangeLength
+				unmappedSeedRange := seedStart + seedRange - unmappedSeedStart
+
+				mappedSeeds, mappedSeedRanges := applyAlmanacMap(
+					unmappedSeedStart,
+					unmappedSeedRange,
+					almanacMap,
+				)
+				newSeedStarts = append(newSeedStarts, mappedSeeds...)
+				newSeedRanges = append(newSeedRanges, mappedSeedRanges...)
+				continue
 			}
-		}
 
-		// If no match is found, append the last value
-		if len(newSeeds) < i+1 {
-			newSeeds = append(newSeeds, sourceValue)
+			newSeedRanges = append(newSeedRanges, seedRange)
 		}
 	}
 
-	return newSeeds
+	if len(newSeedStarts) == 0 {
+		newSeedStarts = append(newSeedStarts, seedStart)
+		newSeedRanges = append(newSeedRanges, seedRange)
+	}
+
+	return newSeedStarts, newSeedRanges
 }

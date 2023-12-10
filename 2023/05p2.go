@@ -11,24 +11,26 @@ import (
 func D05P2() {
 	lines := utils.ReadLines("./inputs/05.txt")
 
-	seedNumbers, seedRanges := parseAlmanacSeedsPartTwo(lines)
+	seeds, ranges := parseAlmanacSeedsPartTwo(lines)
 	maps := parseAlmanacMaps(lines)
 
-	lowestLocationNumber := int(^uint(0) >> 1)
-	for i, seedNumber := range seedNumbers {
-		fmt.Printf("Processing seed %d\n", i)
-		seeds := []int{}
-		for j := 0; j < seedRanges[i]; j++ {
-			seeds = append(seeds, seedNumber+j)
-		}
-		for _, almanacMap := range maps {
-			seeds = applyAlmanacMap(seeds, almanacMap)
+	for _, almanacMap := range maps {
+		mappedSeeds := []int{}
+		mappedRanges := []int{}
+		for i, seed := range seeds {
+			newSeeds, newRanges := applyAlmanacMap(seed, ranges[i], almanacMap)
+			mappedSeeds = append(mappedSeeds, newSeeds...)
+			mappedRanges = append(mappedRanges, newRanges...)
 		}
 
-		for _, seed := range seeds {
-			if seed < lowestLocationNumber {
-				lowestLocationNumber = seed
-			}
+		seeds = mappedSeeds
+		ranges = mappedRanges
+	}
+
+	lowestLocationNumber := int(^uint(0) >> 1)
+	for _, seed := range seeds {
+		if seed < lowestLocationNumber {
+			lowestLocationNumber = seed
 		}
 	}
 
@@ -36,8 +38,6 @@ func D05P2() {
 }
 
 func parseAlmanacSeedsPartTwo(lines []string) ([]int, []int) {
-	fmt.Println("Parsing seeds...")
-
 	seedNumbers := []int{}
 	seedRanges := []int{}
 
