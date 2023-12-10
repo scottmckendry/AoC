@@ -7,7 +7,7 @@ import (
 )
 
 type pipe struct {
-	conectionType     rune
+	connectionType    rune
 	connectsTo        []coordinate
 	distanceFromStart int
 	visited           bool
@@ -43,9 +43,9 @@ func parsePipes(lines []string) (map[coordinate]pipe, coordinate) {
 			switch char {
 			case '|', '-', 'S', 'F', '7', 'J', 'L':
 				pipeMap[coordinate{x, y}] = pipe{
-					conectionType: char,
-					connectsTo:    findConnections(coordinate{x, y}, char),
-					visited:       false,
+					connectionType: char,
+					connectsTo:     findConnections(coordinate{x, y}, char),
+					visited:        false,
 				}
 				if char == 'S' {
 					start = coordinate{x, y}
