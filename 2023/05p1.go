@@ -31,26 +31,24 @@ func D05P1() {
 
 	lowestLocationNumber := int(^uint(0) >> 1)
 	for _, seed := range seeds {
-		if seed[len(seed)-1] < lowestLocationNumber && lowestLocationNumber != 0 {
-			lowestLocationNumber = seed[len(seed)-1]
+		if seed < lowestLocationNumber {
+			lowestLocationNumber = seed
 		}
 	}
 
 	fmt.Printf("Lowest location number: %d\n", lowestLocationNumber)
 }
 
-func parseAlmanacSeeds(lines []string) [][]int {
-	var seeds [][]int
+func parseAlmanacSeeds(lines []string) []int {
+	var seeds []int
 
 	seedListString := strings.Split(lines[0], ": ")[1]
 	for _, seedString := range strings.Split(seedListString, " ") {
-		currentSeed := []int{}
 		seedNumber, _ := strconv.Atoi(seedString)
-
-		currentSeed = append(currentSeed, seedNumber)
-		seeds = append(seeds, currentSeed)
+		seeds = append(seeds, seedNumber)
 	}
 
+	fmt.Println("Seed numbers: ", seeds)
 	return seeds
 }
 
@@ -87,25 +85,25 @@ func parseAlmanacMaps(lines []string) []alamanacMap {
 	return almanacMaps
 }
 
-func applyAlmanacMap(seeds [][]int, almanacMap alamanacMap) [][]int {
+func applyAlmanacMap(seeds []int, almanacMap alamanacMap) []int {
 	fmt.Printf("Applying map %s...\n", almanacMap.mapName)
-	startingLength := len(seeds[0])
+	newSeeds := []int{}
 	for i, seed := range seeds {
+		sourceValue := seed
 		for _, almanacMapRange := range almanacMap.ranges {
-			sourceValue := seed[len(seed)-1]
 
 			if sourceValue >= almanacMapRange.sourceRangeStart &&
 				sourceValue < almanacMapRange.sourceRangeStart+almanacMapRange.rangeLength {
 				diff := almanacMapRange.sourceRangeStart - almanacMapRange.destinationRangeStart
-				seeds[i] = append(seed, sourceValue-diff)
+				newSeeds = append(newSeeds, sourceValue-diff)
 			}
 		}
 
 		// If no match is found, append the last value
-		if len(seeds[i]) < startingLength+1 {
-			seeds[i] = append(seed, seed[len(seed)-1])
+		if len(newSeeds) < i+1 {
+			newSeeds = append(newSeeds, sourceValue)
 		}
 	}
 
-	return seeds
+	return newSeeds
 }

@@ -17,17 +17,17 @@ func D05P2() {
 	lowestLocationNumber := int(^uint(0) >> 1)
 	for i, seedNumber := range seedNumbers {
 		fmt.Printf("Processing seed %d\n", i)
-		seeds := [][]int{}
+		seeds := []int{}
 		for j := 0; j < seedRanges[i]; j++ {
-			seeds = append(seeds, []int{seedNumber + j})
+			seeds = append(seeds, seedNumber+j)
 		}
 		for _, almanacMap := range maps {
 			seeds = applyAlmanacMap(seeds, almanacMap)
 		}
 
 		for _, seed := range seeds {
-			if seed[len(seed)-1] < lowestLocationNumber {
-				lowestLocationNumber = seed[len(seed)-1]
+			if seed < lowestLocationNumber {
+				lowestLocationNumber = seed
 			}
 		}
 	}
@@ -54,8 +54,4 @@ func parseAlmanacSeedsPartTwo(lines []string) ([]int, []int) {
 	}
 
 	return seedNumbers, seedRanges
-}
-
-func D05P2temp() {
-	fmt.Println("Parsing seeds...")
 }

@@ -20,7 +20,7 @@ var solutions = map[string]func(){
 	"04P1:Scratchcards":                    D04P1,
 	"04P2:Scratchcards":                    D04P2,
 	"05P1:If You Give a Seed A Fertilizer": D05P1,
-	"05P2:If You Give a Seed A Fertilizer": D05P2temp, // Need to revisit this one. Currently takes and hour and a half to run so can't benchmark it
+	"05P2:If You Give a Seed A Fertilizer": D05P2,
 	"06P1:Wait For It":                     D06P1,
 	"06P2:Wait For It":                     D06P2,
 	"07P1:Camel Cards":                     D07P1,
