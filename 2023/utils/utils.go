@@ -3,6 +3,7 @@ package utils
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"reflect"
 	"runtime"
@@ -16,6 +17,11 @@ type SolutionStatistics struct {
 	Day           string
 	Part          string
 	ExecutionTime time.Duration
+}
+
+type Coordinate struct {
+	X int
+	Y int
 }
 
 func ReadLines(path string) []string {
@@ -105,4 +111,8 @@ func greatestCommonDivisor(a, b int) int {
 		a, b = b, a%b
 	}
 	return a
+}
+
+func GetManhattanDistance(a, b Coordinate) int {
+	return int(math.Abs(float64(a.X-b.X)) + math.Abs(float64(a.Y-b.Y)))
 }
