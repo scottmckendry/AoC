@@ -19,62 +19,65 @@ type starPair struct {
 
 func D11P1() {
 	lines := utils.ReadLines("inputs/11.txt")
-	lines = expandUniverse(lines, 1)
 
 	stars := parseStars(lines)
+	stars = expandUniverse(stars, 2, len(lines[0]), len(lines))
+
 	starPairs := pairStars(stars)
-
-	manhattanSum := 0
-	for _, starPair := range starPairs {
-		starPair.distance = utils.GetManhattanDistance(
-			starPair.starA.skyPosition,
-			starPair.starB.skyPosition,
-		)
-
-		manhattanSum += starPair.distance
-	}
-
-	fmt.Printf("Sum of all star pair distances: %d\n", manhattanSum)
+	fmt.Printf("Sum of all star pair distances: %d\n", getSumDistancesBetweenStarPairs(starPairs))
 }
 
-func expandUniverse(lines []string, age int) []string {
-	expandedRows := []string{}
-	for _, line := range lines {
-		for i, char := range line {
-			if char == '#' {
+func expandUniverse(
+	stars []star,
+	expansionFactor int,
+	originalWidth int,
+	originalHeight int,
+) []star {
+	expandedRows := []star{}
+	expandedRows = append(expandedRows, stars...)
+
+	for y := 0; y < originalHeight; y++ {
+		starInRow := false
+		for _, star := range stars {
+			if star.skyPosition.Y == y {
+				starInRow = true
 				break
 			}
-
-			if i == len(line)-1 {
-				for i := 0; i < age; i++ {
-					expandedRows = append(expandedRows, line)
-				}
-			}
 		}
-		expandedRows = append(expandedRows, line)
-	}
 
-	expandedRowsAndColumns := make([]string, len(expandedRows))
-	for i := 0; i < len(expandedRows[0]); i++ {
-		appendCol := true
-		for j, line := range expandedRows {
-			char := line[i]
-			expandedRowsAndColumns[j] += string(char)
-			if char == '#' {
-				appendCol = false
-				continue
-			}
-			if j == len(expandedRows)-1 && appendCol {
-				for k := 0; k < len(expandedRows); k++ {
-					for i := 0; i < age; i++ {
-						expandedRowsAndColumns[k] += "."
-					}
+		// Update Y coordinate of all stars displaced by expansion
+		if !starInRow {
+			for i, star := range stars {
+				if star.skyPosition.Y > y {
+					expandedRows[i].skyPosition.Y += expansionFactor - 1
 				}
 			}
 		}
 	}
 
-	return expandedRowsAndColumns
+	// Repeat for columns
+	expandedColumns := []star{}
+	expandedColumns = append(expandedColumns, expandedRows...)
+	for x := 0; x < originalWidth; x++ {
+		starInColumn := false
+		for _, star := range expandedRows {
+			if star.skyPosition.X == x {
+				starInColumn = true
+				break
+			}
+		}
+
+		// Update X coordinate of all stars displaced by expansion
+		if !starInColumn {
+			for i, star := range expandedRows {
+				if star.skyPosition.X > x {
+					expandedColumns[i].skyPosition.X += expansionFactor - 1
+				}
+			}
+		}
+	}
+
+	return expandedColumns
 }
 
 func parseStars(lines []string) []star {
@@ -115,4 +118,17 @@ func pairStars(stars []star) []starPair {
 	}
 
 	return pairs
+}
+
+func getSumDistancesBetweenStarPairs(starPairs []starPair) int {
+	manhattanSum := 0
+	for _, starPair := range starPairs {
+		starPair.distance = utils.GetManhattanDistance(
+			starPair.starA.skyPosition,
+			starPair.starB.skyPosition,
+		)
+		manhattanSum += starPair.distance
+	}
+
+	return manhattanSum
 }
