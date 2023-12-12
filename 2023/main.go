@@ -33,6 +33,7 @@ var solutions = map[string]func(){
 	"10P2:Pipe Maze":                       D10P2,
 	"11P1:Cosmic Expansion":                D11P1,
 	"11P2:Cosmic Expansion":                D11P2,
+	"12P1:Hot Springs":                     D12P1,
 }
 
 func main() {
