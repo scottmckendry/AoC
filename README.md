@@ -5,6 +5,10 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
   <img alt="grinch" src="https://github.com/scottmckendry/AoC/assets/39483124/def61fe9-d27c-4440-b033-4fb7630306e0"/>
 </p>
 
+## Project Structure
+I've separated each year into its own Go module. Each day is separated into two files, one for each part of the challenge. To run a solution, simply `cd` into the directory and run `go run . -solution 01p1` (where `01p1` is the day and part you want to run).
+The `-benchmark` flag can be used to time the execution of the solution. Using the `-benchmark` flag on its own will run all solutions for the year 100 times over, getting the average execution time.
+
 > [!NOTE]
 > Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/readmeStats.yml) and are not indicative of the performance of the code on your machine.
 > The action uses the `ubuntu-latest` image and runs each solution 100 times to get an average. This is by no means a perfect benchmark, so take the results below with a grain of salt.
@@ -28,7 +32,7 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 
 <!-- 2023TableEnd -->
 **TODO:**
-- Improve Day 5 p2 performance. The current implementation takes 1.5 hours to run on my machine so I cannot benchmark with the GitHub action. The statistic above is referencing a different function.
+- In the process of improving the performance of Day 5 part 2, I've gone and broken it to the point where it no longer gives the correct answer. So while it is an improvement of the original 1.5 hours, it still needs some work. 
 
 ## 2022
 <!-- 2022TableStart -->
