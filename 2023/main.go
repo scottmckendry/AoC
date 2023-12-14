@@ -35,6 +35,8 @@ var solutions = map[string]func(){
 	"11P2:Cosmic Expansion":                D11P2,
 	"12P1:Hot Springs":                     D12P1,
 	"12P2:Hot Springs":                     D12P2,
+	"13P1:Point of Incidence":              D13P1,
+	"13P2:Point of Incidence":              D13P2,
 }
 
 func main() {
