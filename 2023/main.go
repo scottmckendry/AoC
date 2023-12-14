@@ -37,6 +37,7 @@ var solutions = map[string]func(){
 	"12P2:Hot Springs":                     D12P2,
 	"13P1:Point of Incidence":              D13P1,
 	"13P2:Point of Incidence":              D13P2,
+	"14P1:Parabolic Reflector Dish":        D14P1,
 }
 
 func main() {
