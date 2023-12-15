@@ -6,9 +6,8 @@ import (
 	"aoc2023/utils"
 )
 
-var rockCache = map[int]map[utils.Coordinate]rock{}
-
 func D14P2() {
+	var rockCache = map[int]map[utils.Coordinate]rock{}
 	lines := utils.ReadLines("inputs/14.txt")
 	rocks := parseRocks(lines)
 
