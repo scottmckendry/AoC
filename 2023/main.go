@@ -39,6 +39,8 @@ var solutions = map[string]func(){
 	"13P2:Point of Incidence":              D13P2,
 	"14P1:Parabolic Reflector Dish":        D14P1,
 	"14P2:Parabolic Reflector Dish":        D14P2,
+	"15P1:Lens Library":                    D15P1,
+	"15P2:Lens Library":                    D15P2,
 }
 
 func main() {
