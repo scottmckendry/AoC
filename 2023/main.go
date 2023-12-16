@@ -41,6 +41,8 @@ var solutions = map[string]func(){
 	"14P2:Parabolic Reflector Dish":        D14P2,
 	"15P1:Lens Library":                    D15P1,
 	"15P2:Lens Library":                    D15P2,
+	"16P1:The Floor Will Be Lava":          D16P1,
+	"16P2:The Floor Will Be Lava":          D16P2,
 }
 
 func main() {
