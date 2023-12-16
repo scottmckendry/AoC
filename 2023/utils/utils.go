@@ -87,7 +87,7 @@ func GetSolutionStatistics(solutions map[string]func()) []SolutionStatistics {
 			Name:          problemName,
 			Day:           functionName[6:8],
 			Part:          functionName[9:10],
-			ExecutionTime: (averageExecutionTime / 100).Round(time.Microsecond),
+			ExecutionTime: (averageExecutionTime / 10).Round(time.Microsecond),
 		})
 	}
 
