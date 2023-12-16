@@ -79,7 +79,7 @@ func GetSolutionStatistics(solutions map[string]func()) []SolutionStatistics {
 		problemName := strings.Split(name, ":")[1]
 
 		averageExecutionTime := time.Duration(0)
-		for i := 0; i < 100; i++ {
+		for i := 0; i < 10; i++ {
 			averageExecutionTime += Benchmark(solutions[name])
 		}
 

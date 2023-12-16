@@ -7,11 +7,11 @@ All my solutions to the [Advent of Code](https://adventofcode.com/) challenges, 
 
 ## Project Structure
 I've separated each year into its own Go module. Each day is separated into two files, one for each part of the challenge. To run a solution, simply `cd` into the directory and run `go run . -solution 01p1` (where `01p1` is the day and part you want to run).
-The `-benchmark` flag can be used to time the execution of the solution. Using the `-benchmark` flag on its own will run all solutions for the year 100 times over, getting the average execution time.
+The `-benchmark` flag can be used to time the execution of the solution. Using the `-benchmark` flag on its own will run all solutions for the year 10 times over, getting the average execution time.
 
 > [!NOTE]
 > Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/readmeStats.yml) and are not indicative of the performance of the code on your machine.
-> The action uses the `ubuntu-latest` image and runs each solution 100 times to get an average. This is by no means a perfect benchmark, so take the results below with a grain of salt.
+> The action uses the `ubuntu-latest` image and runs each solution 10 times to get an average. This is by no means a perfect benchmark, so take the results below with a grain of salt.
 
 ## 2023
 <!-- 2023TableStart -->
