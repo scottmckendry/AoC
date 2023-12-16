@@ -37,6 +37,7 @@ The `-benchmark` flag can be used to time the execution of the solution. Using t
 <!-- 2023TableEnd -->
 **TODO:**
 - In the process of improving the performance of Day 5 part 2, I've gone and broken it to the point where it no longer gives the correct answer. So while it is an improvement of the original 1.5 hours, it still needs some work. 
+- Day 16 part 2 uses a brute force approach to find the answer. I'm certain with heavy caching and dynamic programming, it could be improved significantly.
 
 ## 2022
 <!-- 2022TableStart -->
