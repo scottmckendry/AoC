@@ -17,22 +17,22 @@ The `-benchmark` flag can be used to time the execution of the solution. Using t
 <!-- 2023TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1) | [492µs](2023/01p1.go) | [1.485ms](2023/01p2.go) | ⭐⭐ |
-| [Day 2: Cube Conundrum](https://adventofcode.com/2023/day/2) | [455µs](2023/02p1.go) | [408µs](2023/02p2.go) | ⭐⭐ |
-| [Day 3: Gear Ratios](https://adventofcode.com/2023/day/3) | [460µs](2023/03p1.go) | [2.139ms](2023/03p2.go) | ⭐⭐ |
-| [Day 4: Scratchcards](https://adventofcode.com/2023/day/4) | [2.908ms](2023/04p1.go) | [25.612ms](2023/04p2.go) | ⭐⭐ |
-| [Day 5: If You Give a Seed A Fertilizer](https://adventofcode.com/2023/day/5) | [483µs](2023/05p1.go) | [1.994ms](2023/05p2.go) | ⭐⭐ |
-| [Day 6: Wait For It](https://adventofcode.com/2023/day/6) | [36µs](2023/06p1.go) | [17µs](2023/06p2.go) | ⭐⭐ |
-| [Day 7: Camel Cards](https://adventofcode.com/2023/day/7) | [1.13ms](2023/07p1.go) | [1.033ms](2023/07p2.go) | ⭐⭐ |
-| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8) | [545µs](2023/08p1.go) | [2.461ms](2023/08p2.go) | ⭐⭐ |
-| [Day 9: Mirage Maintenance](https://adventofcode.com/2023/day/9) | [682µs](2023/09p1.go) | [678µs](2023/09p2.go) | ⭐⭐ |
-| [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10) | [6.556ms](2023/10p1.go) | [7.213ms](2023/10p2.go) | ⭐⭐ |
-| [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11) | [11.85ms](2023/11p1.go) | [10.333ms](2023/11p2.go) | ⭐⭐ |
-| [Day 12: Hot Springs](https://adventofcode.com/2023/day/12) | [2.196ms](2023/12p1.go) | [92.371ms](2023/12p2.go) | ⭐⭐ |
-| [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13) | [513µs](2023/13p1.go) | [61.057ms](2023/13p2.go) | ⭐⭐ |
-| [Day 14: Parabolic Reflector Dish](https://adventofcode.com/2023/day/14) | [6.514ms](2023/14p1.go) | [490.704ms](2023/14p2.go) | ⭐⭐ |
-| [Day 15: Lens Library](https://adventofcode.com/2023/day/15) | [149µs](2023/15p1.go) | [929µs](2023/15p2.go) | ⭐⭐ |
-| [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16) | [4.652ms](2023/16p1.go) | [857.479ms](2023/16p2.go) | ⭐⭐ |
+| [Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1) | [470µs](2023/01p1.go) | [1.443ms](2023/01p2.go) | ⭐⭐ |
+| [Day 2: Cube Conundrum](https://adventofcode.com/2023/day/2) | [346µs](2023/02p1.go) | [281µs](2023/02p2.go) | ⭐⭐ |
+| [Day 3: Gear Ratios](https://adventofcode.com/2023/day/3) | [363µs](2023/03p1.go) | [2.067ms](2023/03p2.go) | ⭐⭐ |
+| [Day 4: Scratchcards](https://adventofcode.com/2023/day/4) | [3.08ms](2023/04p1.go) | [26.395ms](2023/04p2.go) | ⭐⭐ |
+| [Day 5: If You Give a Seed A Fertilizer](https://adventofcode.com/2023/day/5) | [552µs](2023/05p1.go) | [2.253ms](2023/05p2.go) | ⭐⭐ |
+| [Day 6: Wait For It](https://adventofcode.com/2023/day/6) | [24µs](2023/06p1.go) | [24µs](2023/06p2.go) | ⭐⭐ |
+| [Day 7: Camel Cards](https://adventofcode.com/2023/day/7) | [870µs](2023/07p1.go) | [939µs](2023/07p2.go) | ⭐⭐ |
+| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8) | [519µs](2023/08p1.go) | [2.466ms](2023/08p2.go) | ⭐⭐ |
+| [Day 9: Mirage Maintenance](https://adventofcode.com/2023/day/9) | [678µs](2023/09p1.go) | [646µs](2023/09p2.go) | ⭐⭐ |
+| [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10) | [7.052ms](2023/10p1.go) | [7.455ms](2023/10p2.go) | ⭐⭐ |
+| [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11) | [11.751ms](2023/11p1.go) | [14.759ms](2023/11p2.go) | ⭐⭐ |
+| [Day 12: Hot Springs](https://adventofcode.com/2023/day/12) | [2.189ms](2023/12p1.go) | [88.894ms](2023/12p2.go) | ⭐⭐ |
+| [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13) | [531µs](2023/13p1.go) | [60.939ms](2023/13p2.go) | ⭐⭐ |
+| [Day 14: Parabolic Reflector Dish](https://adventofcode.com/2023/day/14) | [6.483ms](2023/14p1.go) | [483.833ms](2023/14p2.go) | ⭐⭐ |
+| [Day 15: Lens Library](https://adventofcode.com/2023/day/15) | [180µs](2023/15p1.go) | [1.023ms](2023/15p2.go) | ⭐⭐ |
+| [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16) | [4.867ms](2023/16p1.go) | [868.132ms](2023/16p2.go) | ⭐⭐ |
 
 <!-- 2023TableEnd -->
 **TODO:**
@@ -43,17 +43,17 @@ The `-benchmark` flag can be used to time the execution of the solution. Using t
 <!-- 2022TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | [206µs](2022/01p1.go) | [214µs](2022/01p2.go) | ⭐⭐ |
-| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | [264µs](2022/02p1.go) | [285µs](2022/02p2.go) | ⭐⭐ |
-| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [259µs](2022/03p1.go) | [198µs](2022/03p2.go) | ⭐⭐ |
-| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | [780µs](2022/04p1.go) | [652µs](2022/04p2.go) | ⭐⭐ |
-| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | [732µs](2022/05p1.go) | [673µs](2022/05p2.go) | ⭐⭐ |
-| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | [302µs](2022/06p1.go) | [2.118ms](2022/06p2.go) | ⭐⭐ |
-| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | [222µs](2022/07p1.go) | [178µs](2022/07p2.go) | ⭐⭐ |
-| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | [290µs](2022/08p1.go) | [1.399ms](2022/08p2.go) | ⭐⭐ |
-| [Day 9: Rope Bridge](https://adventofcode.com/2022/day/9) | [992µs](2022/09p1.go) | [1.758ms](2022/09p2.go) | ⭐⭐ |
-| [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | [37µs](2022/10p1.go) | [111µs](2022/10p2.go) | ⭐⭐ |
-| [Day 11: Monkey in the Middle](https://adventofcode.com/2022/day/11) | [103µs](2022/11p1.go) | [13.9ms](2022/11p2.go) | ⭐⭐ |
-| [Day 12: Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [3.642ms](2022/12p1.go) | [2.941ms](2022/12p2.go) | ⭐⭐ |
+| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | [210µs](2022/01p1.go) | [211µs](2022/01p2.go) | ⭐⭐ |
+| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | [275µs](2022/02p1.go) | [268µs](2022/02p2.go) | ⭐⭐ |
+| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [252µs](2022/03p1.go) | [167µs](2022/03p2.go) | ⭐⭐ |
+| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | [684µs](2022/04p1.go) | [627µs](2022/04p2.go) | ⭐⭐ |
+| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | [680µs](2022/05p1.go) | [766µs](2022/05p2.go) | ⭐⭐ |
+| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | [369µs](2022/06p1.go) | [2.092ms](2022/06p2.go) | ⭐⭐ |
+| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | [223µs](2022/07p1.go) | [189µs](2022/07p2.go) | ⭐⭐ |
+| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | [251µs](2022/08p1.go) | [1.295ms](2022/08p2.go) | ⭐⭐ |
+| [Day 9: Rope Bridge](https://adventofcode.com/2022/day/9) | [919µs](2022/09p1.go) | [1.698ms](2022/09p2.go) | ⭐⭐ |
+| [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | [31µs](2022/10p1.go) | [48µs](2022/10p2.go) | ⭐⭐ |
+| [Day 11: Monkey in the Middle](https://adventofcode.com/2022/day/11) | [66µs](2022/11p1.go) | [13.598ms](2022/11p2.go) | ⭐⭐ |
+| [Day 12: Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [3.662ms](2022/12p1.go) | [2.882ms](2022/12p2.go) | ⭐⭐ |
 
 <!-- 2022TableEnd -->
