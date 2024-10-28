@@ -2,7 +2,6 @@ package main
 
 import "core:fmt"
 import "core:strconv"
-import "core:time"
 import "utils"
 
 D01P1 :: proc() {
