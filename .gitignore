@@ -22,4 +22,5 @@ go.work
 
 # Binaries & executables
 **/aoc202*
+2021/2021
 *.exe
