@@ -1,6 +1,7 @@
 package utils
 
 import "core:fmt"
+import "core:mem"
 import "core:os"
 import "core:slice"
 import "core:strings"
@@ -13,17 +14,15 @@ solution_stat :: struct {
 	execution_time: time.Duration,
 }
 
-read_lines :: proc(filepath: string) -> []string {
+read_lines :: proc(filepath: string) -> ([]string, []u8) {
 	data, ok := os.read_entire_file(filepath)
 	if !ok {
 		fmt.eprintfln("Error reading file: %v", filepath)
-		return {}
+		return {}, {}
 	}
 
-	str := string(data)
-	lines := strings.split(str, "\n")
-
-	return lines[0:len(lines) - 1]
+	lines := strings.split(string(data), "\n")
+	return lines[0:len(lines) - 1], data
 }
 
 write_lines :: proc(filepath: string, lines: [dynamic]string) {
@@ -70,9 +69,9 @@ get_solution_stats :: proc(solutions: map[string]proc()) -> []solution_stat {
 		}
 
 		stats[i] = solution_stat {
-			name           = strings.split(key, ":")[1],
-			day            = strings.split(key, ":")[0][0:2],
-			part           = strings.split(key, ":")[0][3:4],
+			name           = strings.split(key, ":", context.temp_allocator)[1],
+			day            = strings.split(key, ":", context.temp_allocator)[0][0:2],
+			part           = strings.split(key, ":", context.temp_allocator)[0][3:4],
 			execution_time = time.Duration(
 				time.duration_round((sum_ex_time / 10), time.Microsecond),
 			),

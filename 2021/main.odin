@@ -119,8 +119,9 @@ update_readme :: proc() {
 	// remove final newline
 	readme_table = readme_table[:len(readme_table) - 1]
 
-	readme := utils.read_lines("../README.md")
+	readme, backing := utils.read_lines("../README.md")
 	defer delete(readme)
+	defer delete(backing)
 
 	start: int
 	end: int
@@ -134,10 +135,11 @@ update_readme :: proc() {
 
 	// remove the existing table and add the new one
 	new_content: [dynamic]string
+	defer delete(new_content)
+
 	append(&new_content, ..readme[:start + 1])
 	append(&new_content, readme_table)
 	append(&new_content, ..readme[end:])
 
 	utils.write_lines("../README.md", new_content)
-	delete(new_content)
 }
