@@ -6,11 +6,13 @@ import "utils"
 
 D01P2 :: proc() {
 	lines := utils.read_lines("./inputs/01p1.txt")
+	defer delete(lines)
+
 	depth_increase_count := get_depth_increase_count_windowed(lines)
 	fmt.printfln("Depth increasd %v times.", depth_increase_count)
 }
 
-get_depth_increase_count_windowed :: proc(lines: [dynamic]string) -> int {
+get_depth_increase_count_windowed :: proc(lines: []string) -> int {
 	depth_increase_count := 0
 
 	prev_depth := 0

@@ -13,26 +13,26 @@ solution_stat :: struct {
 	execution_time: time.Duration,
 }
 
-read_lines :: proc(filepath: string) -> [dynamic]string {
-	data, ok := os.read_entire_file(filepath, context.allocator)
+read_lines :: proc(filepath: string) -> []string {
+	data, ok := os.read_entire_file(filepath)
 	if !ok {
 		fmt.eprintfln("Error reading file: %v", filepath)
-		return [dynamic]string{}
+		return {}
 	}
 
-	lines := [dynamic]string{}
-	iter := string(data)
-	for line in strings.split_lines_iterator(&iter) {
-		append(&lines, line)
-	}
+	str := string(data)
+	lines := strings.split(str, "\n")
 
-	return lines
+	return lines[0:len(lines) - 1]
 }
 
 write_lines :: proc(filepath: string, lines: [dynamic]string) {
 	content_to_write: string
 	for line in lines {
-		content_to_write = strings.concatenate({content_to_write, line, "\n"})
+		content_to_write = strings.concatenate(
+			{content_to_write, line, "\n"},
+			context.temp_allocator,
+		)
 	}
 
 	ok := os.write_entire_file(filepath, transmute([]u8)content_to_write)
@@ -51,12 +51,13 @@ benchmark :: proc(solution: proc()) -> time.Duration {
 
 get_solution_stats :: proc(solutions: map[string]proc()) -> []solution_stat {
 	stats := make([]solution_stat, len(solutions))
-	i := 0
-
 	ordered_keys := make([]string, len(solutions))
+	defer delete(ordered_keys)
+
+	i_stat := 0
 	for key, _ in solutions {
-		ordered_keys[i] = key
-		i += 1
+		ordered_keys[i_stat] = key
+		i_stat += 1
 	}
 
 	slice.sort(ordered_keys)

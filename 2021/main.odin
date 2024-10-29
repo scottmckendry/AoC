@@ -2,6 +2,7 @@ package main
 
 import "core:flags"
 import "core:fmt"
+import "core:mem"
 import "core:os"
 import "core:strconv"
 import "core:strings"
@@ -15,6 +16,25 @@ solutions: map[string]proc() = {
 }
 
 main :: proc() {
+	track: mem.Tracking_Allocator
+	mem.tracking_allocator_init(&track, context.allocator)
+	context.allocator = mem.tracking_allocator(&track)
+	defer {
+		if len(track.allocation_map) > 0 {
+			fmt.eprintf("=== %v allocations not freed: ===\n", len(track.allocation_map))
+			for _, entry in track.allocation_map {
+				fmt.eprintf("- %v bytes @ %v\n", entry.size, entry.location)
+			}
+		}
+		if len(track.bad_free_array) > 0 {
+			fmt.eprintf("=== %v incorrect frees: ===\n", len(track.bad_free_array))
+			for entry in track.bad_free_array {
+				fmt.eprintf("- %p @ %v\n", entry.memory, entry.location)
+			}
+		}
+		mem.tracking_allocator_destroy(&track)
+	}
+
 	options :: struct {
 		benchmark: bool `args:"name=benchmark" usage:"run benchmarks for all solutions"`,
 		solution:  string `args:"name=solution" usage:"run a specific solution"`,
@@ -25,17 +45,17 @@ main :: proc() {
 	// if no flags are set, exit
 	if !opt.benchmark && opt.solution == "" {
 		fmt.println("No flags set. Exiting.")
-		os.exit(1)
+		return
 	}
 
 	if opt.benchmark && opt.solution == "" {
 		update_readme()
-		os.exit(0)
+		return
 	}
 
 	selected_solution: proc()
 	for name, solution in solutions {
-		if strings.contains(name, strings.to_upper(opt.solution)) {
+		if strings.contains(name, opt.solution) {
 			selected_solution = solution
 			break
 		}
@@ -55,6 +75,8 @@ main :: proc() {
 
 update_readme :: proc() {
 	stats := utils.get_solution_stats(solutions)
+	defer delete(stats)
+
 	for stat, _ in stats {
 		fmt.printfln("%v - Part %s: %v", stat.day, stat.part, stat.execution_time)
 	}
@@ -76,6 +98,7 @@ update_readme :: proc() {
 						stat.day,
 					),
 				},
+				context.temp_allocator,
 			)
 		} else {
 			readme_table = strings.concatenate(
@@ -88,6 +111,7 @@ update_readme :: proc() {
 						stat.day,
 					),
 				},
+				context.temp_allocator,
 			)
 		}
 	}
@@ -96,6 +120,8 @@ update_readme :: proc() {
 	readme_table = readme_table[:len(readme_table) - 1]
 
 	readme := utils.read_lines("../README.md")
+	defer delete(readme)
+
 	start: int
 	end: int
 	for line, i in readme {
@@ -113,4 +139,5 @@ update_readme :: proc() {
 	append(&new_content, ..readme[end:])
 
 	utils.write_lines("../README.md", new_content)
+	delete(new_content)
 }
