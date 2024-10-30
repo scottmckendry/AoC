@@ -4,30 +4,23 @@ import "core:fmt"
 import "core:mem"
 import "core:testing"
 
-@(test)
-part1_example :: proc(t: ^testing.T) {
-	input: [dynamic]string = {"199", "200", "208", "210", "200", "207", "240", "269", "260", "263"}
 
-	result := get_depth_increase_count(input)
-	testing.expect(
-		t,
-		result == 7,
-		fmt.aprintf("Depth increase count failed.\nGot: %v\nWanted: %v", result, 7),
-	)
+@(test)
+d01p1 :: proc(t: ^testing.T) {
+	input: []string = {"199", "200", "208", "210", "200", "207", "240", "269", "260", "263"}
+	got := get_depth_increase_count(input)
+	want := 7
+	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	free_all()
 }
 
 @(test)
-part2_example :: proc(t: ^testing.T) {
-	input: [dynamic]string = {"199", "200", "208", "210", "200", "207", "240", "269", "260", "263"}
-
-	result := get_depth_increase_count_windowed(input)
-	testing.expect(
-		t,
-		result == 5,
-		fmt.aprintf("Depth increase count failed.\nGot: %v\nWanted: %v", result, 5),
-	)
+d01p2 :: proc(t: ^testing.T) {
+	input: []string = {"199", "200", "208", "210", "200", "207", "240", "269", "260", "263"}
+	got := get_depth_increase_count_windowed(input)
+	want := 5
+	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	free_all()
 }
