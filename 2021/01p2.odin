@@ -5,7 +5,7 @@ import "core:strconv"
 import "utils"
 
 D01P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/01p1.txt")
+	lines, backing := utils.read_lines("./inputs/01.txt")
 	defer delete(lines)
 	defer delete(backing)
 
