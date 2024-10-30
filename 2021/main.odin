@@ -88,7 +88,7 @@ update_readme :: proc() {
 			readme_table = strings.concatenate(
 				{
 					readme_table,
-					fmt.aprintf(
+					fmt.tprintf(
 						"| [Day %v: %v](https://adventofcode.com/2023/day/%v) | [%v](%v/%vp1.odin) | ",
 						dayInt,
 						stat.name,
@@ -104,7 +104,7 @@ update_readme :: proc() {
 			readme_table = strings.concatenate(
 				{
 					readme_table,
-					fmt.aprintf(
+					fmt.tprintf(
 						"[%s](%v/%vp2.odin) | ⭐⭐ |\n",
 						stat.execution_time,
 						year,
