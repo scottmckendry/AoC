@@ -13,6 +13,8 @@ year :: "2021"
 solutions: map[string]proc() = {
 	"01P1:Sonar Sweep" = D01P1,
 	"01P2:Sonar Sweep" = D01P2,
+	"O2P1:Dive!"       = D02P1,
+	"O2P2:Dive!"       = D02P2,
 }
 
 main :: proc() {
