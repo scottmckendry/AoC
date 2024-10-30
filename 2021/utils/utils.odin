@@ -1,7 +1,6 @@
 package utils
 
 import "core:fmt"
-import "core:mem"
 import "core:os"
 import "core:slice"
 import "core:strings"

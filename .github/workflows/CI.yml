@@ -1,4 +1,4 @@
-name: Generate Statistics Tables for Readme
+name: CI
 on: push
 
 jobs:
@@ -20,3 +20,18 @@ jobs:
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
                   commit_message: Update readme statistics
+
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: laytan/setup-odin@v2
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Report
+              run: odin report ./2021
+            - name: Test
+              run: odin test ./2021
+            - name: Check
+              run: odin check ./2021 -vet --strict-style
