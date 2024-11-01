@@ -6,6 +6,7 @@ import "core:strings"
 import "utils"
 
 bingo_card :: struct {
+	won:     bool,
 	numbers: [5][5]bingo_number,
 }
 
@@ -33,28 +34,32 @@ get_winning_bingo_score :: proc(input: []string) -> int {
 		append(&cards, parse_bingo_card(input[i:i + 5]))
 	}
 
+	current_card := 0
 	winning_card: int
-	draw_index := 0
-	for draw_index < len(drawings) {
+	winning_drawing := 0
+	game_won := false
+	for drawing in drawings {
+		if game_won {
+			break
+		}
 		for &card in cards {
 			for &row in card.numbers {
 				for &number in row {
-					if number.number == drawings[draw_index] {
+					if number.number == drawing {
 						number.drawn = true
 					}
 				}
 			}
+			current_card = check_bingo(card)
+			if current_card != 0 {
+				game_won = true
+				winning_card = current_card
+				winning_drawing = drawing
+			}
 		}
-
-		winning_card, _ = check_bingo(cards)
-		if winning_card != 0 {
-			break
-		}
-
-		draw_index += 1
 	}
 
-	return winning_card * drawings[draw_index]
+	return winning_card * winning_drawing
 }
 
 parse_bingo_drawings :: proc(input: []string) -> [dynamic]int {
@@ -83,27 +88,25 @@ parse_bingo_card :: proc(raw_card: []string) -> bingo_card {
 	return card
 }
 
-check_bingo :: proc(cards: [dynamic]bingo_card) -> (sum: int, index: int) {
-	for &card, card_index in cards {
-		// Check rows
-		for &row in card.numbers {
-			if row[0].drawn && row[1].drawn && row[2].drawn && row[3].drawn && row[4].drawn {
-				return get_unmarked_sum(card), card_index
-			}
+check_bingo :: proc(card: bingo_card) -> int {
+	// Check rows
+	for row in card.numbers {
+		if row[0].drawn && row[1].drawn && row[2].drawn && row[3].drawn && row[4].drawn {
+			return get_unmarked_sum(card)
 		}
-		// Check columns
-		for i := 0; i < 5; i += 1 {
-			if card.numbers[0][i].drawn &&
-			   card.numbers[1][i].drawn &&
-			   card.numbers[2][i].drawn &&
-			   card.numbers[3][i].drawn &&
-			   card.numbers[4][i].drawn {
-				return get_unmarked_sum(card), card_index
-			}
+	}
+	// Check columns
+	for i := 0; i < 5; i += 1 {
+		if card.numbers[0][i].drawn &&
+		   card.numbers[1][i].drawn &&
+		   card.numbers[2][i].drawn &&
+		   card.numbers[3][i].drawn &&
+		   card.numbers[4][i].drawn {
+			return get_unmarked_sum(card)
 		}
 	}
 
-	return 0, -1
+	return 0
 }
 
 get_unmarked_sum :: proc(card: bingo_card) -> int {

@@ -22,30 +22,31 @@ get_last_bingo_winner_score :: proc(input: []string) -> int {
 		append(&cards, parse_bingo_card(input[i:i + 5]))
 	}
 
-    current_card := 0
-    draw_index := 0
-    current_card_idx := 0
+	current_card := 0
 	winning_card: int
-	winning_index := 0
-	for draw_index < len(drawings) {
+	winning_drawing := 0
+	for drawing in drawings {
 		for &card in cards {
+			if card.won {
+				continue
+			}
+
 			for &row in card.numbers {
 				for &number in row {
-					if number.number == drawings[draw_index] {
+					if number.number == drawing {
 						number.drawn = true
 					}
 				}
 			}
-		}
 
-		current_card, current_card_idx = check_bingo(cards)
-        if current_card != 0 {
-            winning_card = current_card
-            winning_index = draw_index
-            ordered_remove(&cards, current_card_idx)
-        }
-		draw_index += 1
+			current_card = check_bingo(card)
+			if current_card != 0 {
+				card.won = true
+				winning_card = current_card
+				winning_drawing = drawing
+			}
+		}
 	}
 
-	return winning_card * drawings[winning_index]
+	return winning_card * winning_drawing
 }
