@@ -11,14 +11,16 @@ import "utils"
 year :: "2021"
 
 solutions: map[string]proc() = {
-	"01P1:Sonar Sweep"       = D01P1,
-	"01P2:Sonar Sweep"       = D01P2,
-	"02P1:Dive!"             = D02P1,
-	"02P2:Dive!"             = D02P2,
-	"03P1:Binary Diagnostic" = D03P1,
-	"03P2:Binary Diagnostic" = D03P2,
-	"04P1:Giant Squid"       = D04P1,
-	"04P2:Giant Squid"       = D04P2,
+	"01P1:Sonar Sweep"          = D01P1,
+	"01P2:Sonar Sweep"          = D01P2,
+	"02P1:Dive!"                = D02P1,
+	"02P2:Dive!"                = D02P2,
+	"03P1:Binary Diagnostic"    = D03P1,
+	"03P2:Binary Diagnostic"    = D03P2,
+	"04P1:Giant Squid"          = D04P1,
+	"04P2:Giant Squid"          = D04P2,
+	"05P1:Hydrothermal Venture" = D05P1,
+	"05P2:Hydrothermal Venture" = D05P2,
 }
 
 main :: proc() {
