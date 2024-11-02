@@ -22,7 +22,7 @@ solutions: map[string]proc() = {
 	"05P1:Hydrothermal Venture" = D05P1,
 	"05P2:Hydrothermal Venture" = D05P2,
 	"06P1:Lanternfish"          = D06P1,
-	//"06P2:Lanternfish"          = D06P2,
+	"06P2:Lanternfish"          = D06P2,
 }
 
 main :: proc() {

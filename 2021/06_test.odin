@@ -18,21 +18,21 @@ d06p1 :: proc(t: ^testing.T) {
 	free_all()
 }
 
-//@(test)
-//d06p2 :: proc(t: ^testing.T) {
-//	input := "3,4,3,1,2"
-//
-//	want := 26984457539
-//	got := simulate_lanterfish_growth(input, 256)
-//	testing.expect(t, got == want, fmt.tprintf("Got: %v | Want: %v", got, want))
-//
-//	free_all()
-//}
+@(test)
+d06p2 :: proc(t: ^testing.T) {
+	input := "3,4,3,1,2"
+
+	want := 26984457539
+	got := simulate_lanterfish_growth(input, 256)
+	testing.expect(t, got == want, fmt.tprintf("Got: %v | Want: %v", got, want))
+
+	free_all()
+}
 
 @(test)
 test_parse_laternfish :: proc(t: ^testing.T) {
 	input := "3,4,3,1,2"
-	want := [dynamic]int{3, 4, 3, 1, 2}
+	want := [9]int{0, 1, 1, 2, 1, 0, 0, 0, 0}
 	got := parse_lanterfish(input)
 
 	for fish, i in got {
@@ -44,8 +44,8 @@ test_parse_laternfish :: proc(t: ^testing.T) {
 
 @(test)
 test_simulate_laternfish_day :: proc(t: ^testing.T) {
-	fish := [dynamic]int{2, 3, 2, 0, 1}
-	want := [dynamic]int{1, 2, 1, 6, 0, 8}
+	fish := [9]int{1, 1, 2, 1, 0, 0, 0, 0, 0}
+	want := [9]int{1, 2, 1, 0, 0, 0, 1, 0, 1}
 
 	simulate_lanternfish_day(&fish)
 

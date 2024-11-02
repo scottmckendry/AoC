@@ -17,30 +17,41 @@ D06P1 :: proc() {
 
 simulate_lanterfish_growth :: proc(input: string, days: int) -> int {
 	fish := parse_lanterfish(input)
-	defer delete(fish)
 
 	for _ in 1 ..= days {
 		simulate_lanternfish_day(&fish)
 	}
-	return len(fish)
+
+	total_lanternfish := 0
+	for i in 0 ..< len(fish) {
+		total_lanternfish += fish[i]
+	}
+	return total_lanternfish
 }
 
-parse_lanterfish :: proc(input: string) -> (fish: [dynamic]int) {
+parse_lanterfish :: proc(input: string) -> (fish: [9]int) {
 	fish_strs := strings.split(input, ",", context.temp_allocator)
 	for fish_str in fish_strs {
-		append(&fish, strconv.atoi(fish_str))
+		current_fish := strconv.atoi(fish_str)
+		fish[current_fish] += 1
 	}
 	return
 }
 
-simulate_lanternfish_day :: proc(fish: ^[dynamic]int) {
-	for i in 0 ..< len(fish) {
-		switch fish[i] {
+simulate_lanternfish_day :: proc(fish: ^[9]int) {
+	temp_fish := [9]int{}
+	// reversing the loop ensures that the fish at index 8 are not overwritten
+	for i := 8; i >= 0; i -= 1 {
+		switch i {
 		case 0:
-			fish[i] = 6
-			append(fish, 9) // append 9 instead of 8 because this fish will always be processed in this day
+			temp_fish[6] += fish[i] // fish at index 7 have already been moved, so we can add to them
+			temp_fish[8] = fish[i] // newborn fish at index 8
 		case:
-			fish[i] -= 1
+			temp_fish[i - 1] = fish[i]
 		}
+	}
+
+	for i := 0; i < 9; i += 1 {
+		fish[i] = temp_fish[i]
 	}
 }
