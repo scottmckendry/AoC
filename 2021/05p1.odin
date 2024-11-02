@@ -15,11 +15,6 @@ Vec2 :: struct {
 	y: int,
 }
 
-Vent :: struct {
-	position: Vec2,
-	in_lines: int,
-}
-
 D05P1 :: proc() {
 	lines, backing := utils.read_lines("./inputs/05.txt")
 	defer delete(lines)
@@ -31,7 +26,7 @@ D05P1 :: proc() {
 
 get_overlapping_points :: proc(input: []string) -> int {
 	vent_lines := parse_vent_lines(input)
-	vents := map[Vec2]Vent{}
+	vents := map[Vec2]int{}
 	defer delete(vents)
 	defer delete(vent_lines)
 
@@ -48,10 +43,10 @@ get_overlapping_points :: proc(input: []string) -> int {
 				}
 				vent, ok := vents[pos]
 				if !ok {
-					vents[pos] = Vent{pos, 1}
+					vents[pos] = 1
 				} else {
-					vents[pos] = Vent{pos, vent.in_lines + 1}
-					if vents[pos].in_lines == 2 {
+					vents[pos] = vent + 1
+					if vents[pos] == 2 {
 						overlapping_points += 1
 					}
 				}
