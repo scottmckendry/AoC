@@ -1,9 +1,7 @@
 package main
 
 import "core:fmt"
-import "core:mem"
 import "core:testing"
-
 
 @(test)
 d01p1 :: proc(t: ^testing.T) {

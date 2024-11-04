@@ -13,7 +13,7 @@ jobs:
             - name: Report
               run: odin report ./2021
             - name: Test
-              run: odin test ./2021
+              run: cd 2021 && make test
             - name: Check
               run: odin check ./2021 -vet --strict-style
 
@@ -27,8 +27,7 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
 
-            - run: cd 2021 && odin build .
-            - run: cd 2021 && ./2021 -benchmark
+            - run: cd 2021 && make bench
             - run: cd 2022 && go build .
             - run: cd 2022 && ./aoc2022 -benchmark
             - run: cd 2023 && go build .
