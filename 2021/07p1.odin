@@ -36,6 +36,8 @@ least_fuel_crab_alignment :: proc(input: string, increasing_fuel_cost: bool) -> 
 		}
 		if current_fuel < least_fuel {
 			least_fuel = current_fuel
+		} else {
+			break // fuel cost is increasing, so no need to continue
 		}
 		current_fuel = 0
 	}
