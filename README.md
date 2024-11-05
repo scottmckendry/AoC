@@ -14,7 +14,7 @@ The `-benchmark` flag can be used to time the execution of the solution. Using t
 The same is true for Odin solutions, except the command to run the solution is `odin run . -solution 01p1`.
 
 > [!NOTE]
-> Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/readmeStats.yml) and are not indicative of the performance of the code on your machine.
+> Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/CI.yml) and are not indicative of the performance of the code on your machine.
 > The action uses the `ubuntu-latest` image and runs each solution 10 times to get an average. This is by no means a perfect benchmark, so take the results below with a grain of salt.
 
 ## 2023 (Go)
