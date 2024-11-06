@@ -1,7 +1,6 @@
 package main
 
 import "core:fmt"
-import "core:log"
 import "core:slice"
 import "core:strings"
 import "utils"
@@ -16,26 +15,24 @@ D08P2 :: proc() {
 }
 
 decode_signal_output_values :: proc(input: []string) -> int {
-	log.info("Decoding signal output values")
+	swapped_decoded_values := map[string]int{}
+	defer delete(swapped_decoded_values)
+
 	output_total := 0
-	assert(len(input) > 0, "Input must contain at least one signal line")
 	for line in input {
 		signal_input_digits, signal_output_digits := parse_signal_line(line)
 		decoded_values := decode_digit_strings(signal_input_digits)
 		defer delete(decoded_values)
 
-		swapped_decoded_values := map[string]int{}
-		defer delete(swapped_decoded_values)
 		for k, v in decoded_values {
 			swapped_decoded_values[v] = k
 		}
 
-		// build the 4 digit output number without any expensive string operations
-		output_index := 0
-		for i := 10000; i != 1; i /= 10 {
-			output_total += swapped_decoded_values[signal_output_digits[output_index]] * (i / 10)
-			output_index += 1
+		output_value := 0
+		for digit in signal_output_digits {
+			output_value = output_value * 10 + swapped_decoded_values[digit]
 		}
+		output_total += output_value
 	}
 	return output_total
 }
@@ -70,9 +67,10 @@ decode_digit_strings :: proc(digits: []string) -> (decoded: map[int]string) {
 		}
 	}
 
-	// get digits with 5 segments: 2, 3, 5
+	// get digits with 5 & 6 segments: 2, 3, 5, 6, 9, 0
 	for digit in digits {
-		if len(digit) == 5 {
+		switch len(digit) {
+		case 5:
 			// digit is 3 if contains both characters from 1
 			if get_char_match_count(digit, decoded[1]) == 2 {
 				decoded[3] = digit
@@ -81,22 +79,16 @@ decode_digit_strings :: proc(digits: []string) -> (decoded: map[int]string) {
 				// digit is 2 if contains 1 from 1 and 2 from 4
 				decoded[2] = digit
 			} else {
-				// digit is 5
 				decoded[5] = digit
 			}
-		}
-	}
-
-	// get digits with 6 segments: 0, 6, 9
-	for digit in digits {
-		if len(digit) == 6 {
+		case 6:
 			// digit is 6 if contains all from 5 and 1 from 1
-			if get_char_match_count(digit, decoded[5]) == 5 &&
+			if get_char_match_count(digit, decoded[4]) == 3 &&
 			   get_char_match_count(digit, decoded[1]) == 1 {
 				decoded[6] = digit
-			} else if get_char_match_count(digit, decoded[5]) == 5 &&
+			} else if get_char_match_count(digit, decoded[4]) == 4 &&
 			   get_char_match_count(digit, decoded[1]) == 2 {
-				// digit is 9 if contains all from 5 and 2 from 1
+				// digit is 9 if contains all from 4 and 2 from 1
 				decoded[9] = digit
 			} else {
 				// digit is 0
