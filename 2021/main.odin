@@ -25,6 +25,8 @@ solutions: map[string]proc() = {
 	"06P2:Lanternfish"             = D06P2,
 	"07P1:The Treachery of Whales" = D07P1,
 	"07P2:The Treachery of Whales" = D07P2,
+	"08P1:Seven Segment Search"    = D08P1,
+	"08P2:Seven Segment Search"    = D08P2,
 }
 
 main :: proc() {
