@@ -7,15 +7,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - uses: arduino/setup-task@v2
             - uses: laytan/setup-odin@v2
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
             - name: Report
               run: odin report ./2021
             - name: Test
-              run: cd 2021 && make test
-            - name: Check
-              run: odin check ./2021 -vet --strict-style
+              run: cd 2021 && task
 
     statistics:
         needs: test
@@ -23,11 +22,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - uses: arduino/setup-task@v2
             - uses: laytan/setup-odin@v2
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
 
-            - run: cd 2021 && make bench
+            - run: cd 2021 && task bench
             - run: cd 2022 && go build .
             - run: cd 2022 && ./aoc2022 -benchmark
             - run: cd 2023 && go build .

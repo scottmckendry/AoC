@@ -1,0 +1,21 @@
+version: 3
+
+tasks:
+    default:
+        cmds:
+            - cmd: cp ./tests/*.odin .
+              silent: true
+            - defer: { task: clean }
+            - cmd: odin test . -vet -strict-style
+
+    bench:
+        cmds:
+            - odin run . -- -benchmark
+            - defer: { task: clean }
+
+    clean:
+        cmds:
+            - cmd: rm -f *_test.odin
+              silent: true
+            - cmd: rm -f 2021 || true
+              silent: true
