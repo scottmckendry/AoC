@@ -1,7 +1,6 @@
 package main
 
 import "core:fmt"
-import "core:log"
 import "core:testing"
 
 signals :: []string {
@@ -101,7 +100,6 @@ test_decode_digit_strings :: proc(t: ^testing.T) {
 	}
 
 	got := decode_digit_strings(digits)
-	log.info("Got: %v", got)
 
 	for k, v in want {
 		testing.expect(
