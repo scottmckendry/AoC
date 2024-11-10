@@ -1,9 +1,13 @@
 version: 3
 
+vars:
+    CU: '{{if eq OS "windows"}}coreutils {{end}}'
+    EXE: '{{if eq OS "windows"}}.exe{{end}}'
+
 tasks:
     default:
         cmds:
-            - cmd: cp ./tests/*.odin .
+            - cmd: "{{.CU}}cp ./tests/*.odin ."
               silent: true
             - defer: { task: clean }
             - cmd: odin test . -vet -strict-style
@@ -15,7 +19,7 @@ tasks:
 
     clean:
         cmds:
-            - cmd: rm -f *_test.odin
+            - cmd: "{{.CU}}rm -f *_test.odin"
               silent: true
-            - cmd: rm -f 2021 || true
+            - cmd: "{{.CU}}rm -f 2021{{.EXE}} || true"
               silent: true
