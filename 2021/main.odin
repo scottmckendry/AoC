@@ -31,6 +31,8 @@ solutions: map[string]proc() = {
 	"09P2:Smoke Basin"             = D09P2,
 	"10P1:Syntax Scoring"          = D10P1,
 	"10P2:Autocomplete Scoring"    = D10P2,
+	"11P1:Dumbo Octopus"           = D11P1,
+	"11P2:Dumbo Octopus"           = D11P2,
 }
 
 main :: proc() {
