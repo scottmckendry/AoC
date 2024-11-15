@@ -33,6 +33,8 @@ solutions: map[string]proc() = {
 	"10P2:Autocomplete Scoring"    = D10P2,
 	"11P1:Dumbo Octopus"           = D11P1,
 	"11P2:Dumbo Octopus"           = D11P2,
+	"12P1:Passage Pathfinding"     = D12P1,
+	"12P2:Passage Pathfinding"     = D12P2,
 }
 
 main :: proc() {
