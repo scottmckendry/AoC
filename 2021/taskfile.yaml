@@ -14,7 +14,8 @@ tasks:
 
     bench:
         cmds:
-            - odin run . -- -benchmark
+            - odin build . -o:speed
+            - ./2021{{.EXE}} -benchmark
             - defer: { task: clean }
 
     clean:
