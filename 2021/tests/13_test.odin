@@ -30,7 +30,7 @@ fold_instructions := []string {
 @(test)
 d13p1 :: proc(t: ^testing.T) {
 	want := 17
-	got := fold_transparent_paper(fold_instructions)
+	got := fold_transparent_paper(fold_instructions, false)
 	testing.expect(t, got == want, fmt.tprintf("Got: %v | Want: %v", got, want))
 	free_all()
 }
