@@ -35,6 +35,8 @@ solutions: map[string]proc() = {
 	"11P2:Dumbo Octopus"           = D11P2,
 	"12P1:Passage Pathfinding"     = D12P1,
 	"12P2:Passage Pathfinding"     = D12P2,
+	"13P1:Transparent Oragami"     = D13P1,
+	"13P2:Transparent Oragami"     = D13P2,
 }
 
 main :: proc() {
