@@ -1,12 +1,11 @@
 package main
 
 import "core:fmt"
-import "utils"
+import "core:strings"
 
 D05P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/05.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/05.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	num_overlapping_points := get_overlapping_points_with_diagonals(lines)
 	fmt.printfln("Overlapping points: %v", num_overlapping_points)

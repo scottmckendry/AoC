@@ -1,12 +1,11 @@
 package main
 
 import "core:fmt"
-import "utils"
+import "core:strings"
 
 D04P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/04.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/04.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	winning_score := get_last_bingo_winner_score(lines)
 	fmt.printfln("Last bingo winner score: %d", winning_score)

@@ -3,12 +3,10 @@ package main
 import "core:fmt"
 import "core:slice"
 import "core:strings"
-import "utils"
 
 D08P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/08.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/08.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	output_total := decode_signal_output_values(lines)
 	fmt.printfln("Signal output total: %v", output_total)
@@ -20,6 +18,10 @@ decode_signal_output_values :: proc(input: []string) -> int {
 
 	output_total := 0
 	for line in input {
+		if line == "" {
+			continue
+		}
+
 		signal_input_digits, signal_output_digits := parse_signal_line(line)
 		decoded_values := decode_digit_strings(signal_input_digits)
 		defer delete(decoded_values)

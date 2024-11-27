@@ -2,12 +2,12 @@ package main
 
 import "core:fmt"
 import "core:strconv"
-import "utils"
+import "core:strings"
 
 D03P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/03.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/03.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
+	lines = lines[:len(lines) - 1]
 
 	life_support_rating :=
 		calculate_generator_scrubber_rating(lines, false) *

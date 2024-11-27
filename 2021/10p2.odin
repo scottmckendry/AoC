@@ -2,13 +2,12 @@ package main
 
 import "core:fmt"
 import "core:slice"
+import "core:strings"
 import "core:unicode/utf8"
-import "utils"
 
 D10P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/10.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/10.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	middle_autocomplete_score := get_middle_autocomplete_score(lines)
 	fmt.printfln("Middle Autocomplete Score: %v", middle_autocomplete_score)

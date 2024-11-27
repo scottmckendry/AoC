@@ -2,7 +2,6 @@ package main
 
 import "core:fmt"
 import "core:strings"
-import "utils"
 
 cave :: struct {
 	large:       bool,
@@ -10,9 +9,8 @@ cave :: struct {
 }
 
 D12P1 :: proc() {
-	lines, backing := utils.read_lines("./inputs/12.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/12.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	small_cave_path_total := traverse_caves(lines, true)
 	fmt.printfln("Paths through small caves: %v", small_cave_path_total)
@@ -78,6 +76,10 @@ count_paths :: proc(
 
 parse_caves :: proc(lines: []string) -> (caves: map[string]cave) {
 	for connection in lines {
+		if connection == "" {
+			continue
+		}
+
 		connection_parts := strings.split(connection, "-", context.temp_allocator)
 		for part, i in &connection_parts {
 			mapped_cave, ok := &caves[part]

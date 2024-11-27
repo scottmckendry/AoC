@@ -3,12 +3,10 @@ package main
 import "core:fmt"
 import "core:strconv"
 import "core:strings"
-import "utils"
 
 D11P1 :: proc() {
-	lines, backing := utils.read_lines("./inputs/11.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/11.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	flash_total := get_octopi_energy_flashes(lines, 100)
 	fmt.printfln("Total flashes after 100 steps: %v", flash_total)

@@ -1,12 +1,11 @@
 package main
 
 import "core:fmt"
-import "utils"
+import "core:strings"
 
 D11P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/11.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/11.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	all_flash_at_step := get_all_octopi_flash_step(lines)
 	fmt.printfln("All Octopi flash at step: %v", all_flash_at_step)

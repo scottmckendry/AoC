@@ -3,7 +3,6 @@ package main
 import "core:fmt"
 import "core:strconv"
 import "core:strings"
-import "utils"
 
 VentLine :: struct {
 	start: Vec2,
@@ -16,9 +15,8 @@ Vec2 :: struct {
 }
 
 D05P1 :: proc() {
-	lines, backing := utils.read_lines("./inputs/05.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/05.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	num_overlapping_points := get_overlapping_points(lines)
 	fmt.printfln("Overlapping points: %v", num_overlapping_points)
@@ -68,6 +66,10 @@ sign :: proc(x: int) -> int {
 
 parse_vent_lines :: proc(input: []string) -> (vent_lines: [dynamic]VentLine) {
 	for line in input {
+		if line == "" {
+			continue
+		}
+
 		parts := strings.split(line, " ", context.temp_allocator)
 		start_parts := strings.split(parts[0], ",", context.temp_allocator)
 		end_parts := strings.split(parts[2], ",", context.temp_allocator)

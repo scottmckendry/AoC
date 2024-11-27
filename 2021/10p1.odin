@@ -1,12 +1,11 @@
 package main
 
 import "core:fmt"
-import "utils"
+import "core:strings"
 
 D10P1 :: proc() {
-	lines, backing := utils.read_lines("./inputs/10.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/10.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	syntax_error_score := get_syntax_error_score(lines)
 	fmt.printfln("Syntax Error Score: %v", syntax_error_score)

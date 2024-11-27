@@ -1,12 +1,12 @@
 package main
 
 import "core:fmt"
-import "utils"
+import "core:strings"
 
 D09P1 :: proc() {
-	lines, backing := utils.read_lines("./inputs/09.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/09.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
+	lines = lines[:len(lines) - 1]
 
 	sum_risk_levels := get_risk_levels(lines)
 	fmt.printfln("The sum of risk levels is: %v", sum_risk_levels)
@@ -28,6 +28,10 @@ get_risk_levels :: proc(input: []string) -> int {
 
 parse_heightmap :: proc(input: []string) -> (heightmap: [dynamic]int) {
 	for line in input {
+		if line == "" {
+			continue
+		}
+
 		for j in 0 ..< len(line) {
 			append(&heightmap, cast(int)((line[j]) - '0'))
 		}

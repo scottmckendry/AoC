@@ -4,12 +4,10 @@ import "core:fmt"
 import "core:slice"
 import "core:strconv"
 import "core:strings"
-import "utils"
 
 D07P1 :: proc() {
-	lines, backing := utils.read_lines("./inputs/07.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/07.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	least_fuel := least_fuel_crab_alignment(lines[0], false)
 	fmt.printfln("Least fuel required to align crabs: %v", least_fuel)

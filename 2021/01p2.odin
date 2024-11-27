@@ -2,12 +2,11 @@ package main
 
 import "core:fmt"
 import "core:strconv"
-import "utils"
+import "core:strings"
 
 D01P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/01.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/01.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	depth_increase_count := get_depth_increase_count_windowed(lines)
 	fmt.printfln("Depth increasd %v times.", depth_increase_count)

@@ -1,12 +1,11 @@
 package main
 
 import "core:fmt"
-import "utils"
+import "core:strings"
 
 D13P2 :: proc() {
-	lines, backing := utils.read_lines("./inputs/13.txt")
-	defer delete(lines)
-	defer delete(backing)
+	input_string := #load("./inputs/13.txt", string)
+	lines := strings.split(input_string, "\n", context.temp_allocator)
 
 	visible_dots := fold_transparent_paper(lines, true)
 	fmt.printfln("Total visible dots: %v", visible_dots)
