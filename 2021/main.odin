@@ -113,7 +113,7 @@ update_readme :: proc() {
 				{
 					readme_table,
 					fmt.tprintf(
-						"| [Day %v: %v](https://adventofcode.com/2023/day/%v) | [%v](%v/%vp1.odin) | ",
+						"| [Day %v: %v](https://adventofcode.com/2021/day/%v) | [%v](%v/%vp1.odin) | ",
 						dayInt,
 						stat.name,
 						dayInt,

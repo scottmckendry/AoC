@@ -17,6 +17,12 @@ The same is true for Odin solutions, except the command to run the solution is `
 > Benchmarks are run via [this GitHub Action](https://github.com/scottmckendry/aoc/actions/workflows/CI.yml) and are not indicative of the performance of the code on your machine.
 > The action uses the `ubuntu-latest` image and runs each solution 10 times to get an average. This is by no means a perfect benchmark, so take the results below with a grain of salt.
 
+## 2024 (Odin)
+
+<!-- 2024TableStart -->
+
+<!-- 2024TableEnd -->
+
 ## 2023 (Go)
 
 <!-- 2023TableStart -->
