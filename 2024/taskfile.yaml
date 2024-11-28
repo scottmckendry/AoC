@@ -1,0 +1,26 @@
+version: 3
+
+vars:
+    CU: '{{if eq OS "windows"}}coreutils {{end}}'
+    EXE: '{{if eq OS "windows"}}.exe{{end}}'
+
+tasks:
+    default:
+        cmds:
+            - cmd: "{{.CU}}cp ./tests/*.odin ."
+              silent: true
+            - defer: { task: clean }
+            - cmd: odin test . -vet -strict-style
+
+    bench:
+        cmds:
+            - odin build . -o:speed
+            - ./2024{{.EXE}} -benchmark
+            - defer: { task: clean }
+
+    clean:
+        cmds:
+            - cmd: "{{.CU}}rm -f *_test.odin"
+              silent: true
+            - cmd: "{{.CU}}rm -f 2024{{.EXE}} || true"
+              silent: true
