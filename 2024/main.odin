@@ -12,7 +12,7 @@ year :: "2024"
 
 solutions: map[string]proc() = {
 	"01P1:Day 1" = D01P1,
-	"01P2:Day 1" = D01P1,
+	"01P2:Day 1" = D01P2,
 }
 
 main :: proc() {
