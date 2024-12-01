@@ -18,14 +18,12 @@ get_total_distance_between_pairs :: proc(lines: []string) -> int {
 	defer delete(left)
 	defer delete(right)
 
-	left_slice, right_slice := left[:], right[:]
-
-	slice.sort(left_slice)
-	slice.sort(right_slice)
+	slice.sort(left[:])
+	slice.sort(right[:])
 
 	sum_distances := 0
-	for num, i in left_slice {
-		sum_distances += abs(num - right_slice[i])
+	for num, i in left {
+		sum_distances += abs(num - right[i])
 	}
 
 	return sum_distances

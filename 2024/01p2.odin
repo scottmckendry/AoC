@@ -12,21 +12,21 @@ D01P2 :: proc() {
 }
 
 get_list_similarity_score :: proc(lines: []string) -> int {
-    left, right := parse_number_pairs(lines)
-    defer delete(left)
-    defer delete(right)
+	left, right := parse_number_pairs(lines)
+	defer delete(left)
+	defer delete(right)
 
-    similarity_score := 0
-    for num  in left {
-        count := 0
-        for num2 in right {
-            if num == num2 {
-                count += 1
-            }
-        }
+	similarity_score := 0
+	for num in left {
+		count := 0
+		for num2 in right {
+			if num == num2 {
+				count += 1
+			}
+		}
 
-        similarity_score += num * count
-    }
+		similarity_score += num * count
+	}
 
-    return similarity_score
+	return similarity_score
 }
