@@ -13,6 +13,8 @@ year :: "2024"
 solutions: map[string]proc() = {
 	"01P1:Historian Hysteria" = D01P1,
 	"01P2:Historian Hysteria" = D01P2,
+	"02P1:Red-Nosed Reports"  = D02P1,
+	"02P2:Red-Nosed Reports"  = D02P2,
 }
 
 main :: proc() {
