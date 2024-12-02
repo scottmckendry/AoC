@@ -37,19 +37,18 @@ d02p2 :: proc(t: ^testing.T) {
 	free_all()
 }
 
-
 @(test)
 test_is_safe_report :: proc(t: ^testing.T) {
 	want := true
-	got := is_safe_report({"1", "3", "6", "7", "9"}, false)
+	got := is_safe_report([dynamic]int{1, 3, 6, 7, 9}, false)
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	want = false
-	got = is_safe_report({"8", "6", "4", "4", "1"}, false)
+	got = is_safe_report([dynamic]int{8, 6, 4, 4, 1}, false)
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	want = true
-	got = is_safe_report({"1", "3", "2", "4", "5"}, true)
+	got = is_safe_report([dynamic]int{1, 3, 2, 4, 5}, true)
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	free_all()
@@ -58,15 +57,15 @@ test_is_safe_report :: proc(t: ^testing.T) {
 @(test)
 test_check_sequence :: proc(t: ^testing.T) {
 	want := true
-	got := check_sequence({"1", "3", "6", "7", "9"})
+	got := check_sequence([dynamic]int{1, 3, 6, 7, 9})
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	want = false
-	got = check_sequence({"8", "6", "4", "4", "1"})
+	got = check_sequence([dynamic]int{8, 6, 4, 4, 1})
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	want = false
-	got = check_sequence({"1", "3", "2", "4", "5"})
+	got = check_sequence([dynamic]int{1, 3, 2, 4, 5})
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	free_all()

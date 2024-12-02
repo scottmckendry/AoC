@@ -18,35 +18,37 @@ get_safe_reports :: proc(lines: []string, dampener: bool) -> int {
 		if line == "" {
 			continue
 		}
-		numbers := strings.split(line, " ", context.temp_allocator)
-		dynamic_numbers: [dynamic]string
-		defer delete(dynamic_numbers)
-		append(&dynamic_numbers, ..numbers[:])
-		if is_safe_report(dynamic_numbers, dampener) {
+		str_numbers := strings.split(line, " ", context.temp_allocator)
+		numbers := make([dynamic]int)
+		defer delete(numbers)
+
+		for str in str_numbers {
+			append(&numbers, strconv.atoi(str))
+		}
+
+		if is_safe_report(numbers, dampener) {
 			result += 1
 		}
 	}
 	return result
 }
 
-is_safe_report :: proc(input: [dynamic]string, dampener: bool) -> bool {
-	if check_sequence(input) {
+is_safe_report :: proc(numbers: [dynamic]int, dampener: bool) -> bool {
+	if check_sequence(numbers) {
 		return true
 	}
 
-	// return false if the dampener is off
 	if !dampener {
 		return false
 	}
 
-	// Try removing each number one at a time
-	for i := 0; i < len(input); i += 1 {
-		temp := make([dynamic]string)
+	for i := 0; i < len(numbers); i += 1 {
+		temp := make([dynamic]int)
 		defer delete(temp)
 
-		for j := 0; j < len(input); j += 1 {
+		for j := 0; j < len(numbers); j += 1 {
 			if j != i {
-				append(&temp, input[j])
+				append(&temp, numbers[j])
 			}
 		}
 		if check_sequence(temp) {
@@ -57,20 +59,20 @@ is_safe_report :: proc(input: [dynamic]string, dampener: bool) -> bool {
 	return false
 }
 
-check_sequence :: proc(numbers: [dynamic]string) -> bool {
-	if len(numbers) < 2 do return false
-
-	prev := strconv.atoi(numbers[0])
-	curr := strconv.atoi(numbers[1])
+check_sequence :: proc(numbers: [dynamic]int) -> bool {
+	prev := numbers[0]
+	curr := numbers[1]
 
 	diff := abs(curr - prev)
-	if diff > 3 || diff == 0 do return false
+	if diff > 3 || diff == 0 {
+		return false
+	}
 
 	increasing := curr > prev
 	prev = curr
 
 	for i := 2; i < len(numbers); i += 1 {
-		curr = strconv.atoi(numbers[i])
+		curr = numbers[i]
 
 		if (increasing && curr <= prev) || (!increasing && curr >= prev) {
 			return false
