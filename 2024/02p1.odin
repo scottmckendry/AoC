@@ -42,11 +42,11 @@ is_safe_report :: proc(numbers: [dynamic]int, dampener: bool) -> bool {
 		return false
 	}
 
-	for i := 0; i < len(numbers); i += 1 {
+	for i in 0 ..< len(numbers) {
 		temp := make([dynamic]int)
 		defer delete(temp)
 
-		for j := 0; j < len(numbers); j += 1 {
+		for j in 0 ..< len(numbers) {
 			if j != i {
 				append(&temp, numbers[j])
 			}
@@ -71,7 +71,7 @@ check_sequence :: proc(numbers: [dynamic]int) -> bool {
 	increasing := curr > prev
 	prev = curr
 
-	for i := 2; i < len(numbers); i += 1 {
+	for i in 2 ..< len(numbers) {
 		curr = numbers[i]
 
 		if (increasing && curr <= prev) || (!increasing && curr >= prev) {

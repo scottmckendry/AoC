@@ -39,34 +39,47 @@ d02p2 :: proc(t: ^testing.T) {
 
 @(test)
 test_is_safe_report :: proc(t: ^testing.T) {
-	want := true
-	got := is_safe_report([dynamic]int{1, 3, 6, 7, 9}, false)
-	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
+	test_cases := []struct {
+		input:    [dynamic]int,
+		want:     bool,
+		dampener: bool,
+	} {
+		{[dynamic]int{1, 3, 6, 7, 9}, true, false},
+		{[dynamic]int{8, 6, 4, 4, 1}, false, false},
+		{[dynamic]int{1, 3, 2, 4, 5}, true, true},
+		{[dynamic]int{1, 2, 7, 8, 9}, false, true},
+	}
 
-	want = false
-	got = is_safe_report([dynamic]int{8, 6, 4, 4, 1}, false)
-	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
-
-	want = true
-	got = is_safe_report([dynamic]int{1, 3, 2, 4, 5}, true)
-	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
-
+	for test, i in test_cases {
+		got := is_safe_report(test.input, test.dampener)
+		testing.expect(
+			t,
+			got == test.want,
+			fmt.aprintf("Test case at index %v failed. Got: %v | Want: %v", i, got, test.want),
+		)
+	}
 	free_all()
 }
 
 @(test)
 test_check_sequence :: proc(t: ^testing.T) {
-	want := true
-	got := check_sequence([dynamic]int{1, 3, 6, 7, 9})
-	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
+	test_cases := []struct {
+		input: [dynamic]int,
+		want:  bool,
+	} {
+		{[dynamic]int{1, 3, 6, 7, 9}, true},
+		{[dynamic]int{8, 6, 4, 4, 1}, false},
+		{[dynamic]int{1, 3, 2, 4, 5}, false},
+		{[dynamic]int{7, 6, 4, 2, 1}, true},
+	}
 
-	want = false
-	got = check_sequence([dynamic]int{8, 6, 4, 4, 1})
-	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
-
-	want = false
-	got = check_sequence([dynamic]int{1, 3, 2, 4, 5})
-	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
-
+	for test, i in test_cases {
+		got := check_sequence(test.input)
+		testing.expect(
+			t,
+			got == test.want,
+			fmt.aprintf("Test case at index %v failed. Got: %v | Want: %v", i, got, test.want),
+		)
+	}
 	free_all()
 }
