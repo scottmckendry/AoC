@@ -31,6 +31,13 @@ tasks:
             - ./2024{{.EXE}} -benchmark
             - defer: { task: clean }
 
+    bench-*:
+        vars:
+            SOLUTION: "{{index .MATCH 0 | upper}}"
+        cmds:
+            - odin run . -- -solution={{.SOLUTION}} -benchmark
+            - defer: { task: clean }
+
     clean:
         cmds:
             - cmd: "{{.CU}}rm -f *_test.odin"
