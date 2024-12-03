@@ -25,3 +25,4 @@ go.work
 2021/2021
 *.exe
 *.bin
+2024/.task/checksum

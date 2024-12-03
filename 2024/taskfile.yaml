@@ -1,11 +1,24 @@
 version: 3
 
+interval: 100ms
+
 vars:
     CU: '{{if eq OS "windows"}}coreutils {{end}}'
     EXE: '{{if eq OS "windows"}}.exe{{end}}'
 
 tasks:
     default:
+        watch: true
+        sources:
+            - "**/*.odin"
+        cmds:
+            - cmd: clear
+            - cmd: "{{.CU}}cp ./tests/*.odin ."
+              silent: true
+            - defer: { task: clean }
+            - cmd: odin test . -vet -strict-style
+
+    test:
         cmds:
             - cmd: "{{.CU}}cp ./tests/*.odin ."
               silent: true

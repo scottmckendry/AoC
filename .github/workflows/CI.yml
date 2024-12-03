@@ -18,7 +18,7 @@ jobs:
             - name: Test
               run: |
                   cd 2021 && task
-                  cd ../2024 && task
+                  cd ../2024 && task test
 
     statistics:
         needs: test
