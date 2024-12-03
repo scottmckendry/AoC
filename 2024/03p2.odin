@@ -1,13 +1,12 @@
 package main
 
 import "core:fmt"
-import "core:strconv"
 import "core:strings"
 
 memory_instruction :: struct {
-	condtion: bool,
-	is_do:    bool,
-	mul:      [2]int,
+	condition: bool,
+	is_do:     bool,
+	mul:       [2]int,
 }
 
 D03P2 :: proc() {
@@ -24,7 +23,7 @@ get_sum_of_cond_multiplications :: proc(lines: []string) -> int {
 	doing := true
 	sum := 0
 	for instruction in instructions {
-		if instruction.condtion {
+		if instruction.condition {
 			if instruction.is_do {
 				doing = true
 			} else {
@@ -42,66 +41,39 @@ get_sum_of_cond_multiplications :: proc(lines: []string) -> int {
 
 parse_memory_instructions :: proc(lines: []string) -> (instructions: [dynamic]memory_instruction) {
 	for line in lines {
-		remaining := line
-		for len(remaining) > 0 {
-			mul_index := strings.index(remaining, "mul(")
-			do_index := strings.index(remaining, "do()")
-			dont_index := strings.index(remaining, "don't()")
-
-			if mul_index == -1 {
-				mul_index = 9999
-			}
-			if do_index == -1 {
-				do_index = 9999
-			}
-			if dont_index == -1 {
-				dont_index = 9999
-			}
-
-			// check if there are no remaining instructions or get the nearest instruction
-			start := min(mul_index, do_index, dont_index)
-			if start == 9999 {
-				break
-			}
-
-			if start == do_index {
-				append(&instructions, memory_instruction{condtion = true, is_do = true})
-				remaining = remaining[start + 4:]
-				continue
-			}
-
-			if start == dont_index {
-				append(&instructions, memory_instruction{condtion = true, is_do = false})
-				remaining = remaining[start + 7:]
-				continue
-			}
-
-			start += 4 // skip over "mul("
-			end := strings.index(remaining[start:], ")")
-			if end == -1 {
-				break
-			}
-
-			pair := strings.split(remaining[start:start + end], ",", context.temp_allocator)
-
-			// make sure only two values were found
-			if len(pair) == 2 {
-				number_pair := [2]int{}
-				valid_pair := true
-				for str, i in pair {
-					num, ok := strconv.parse_int(str)
-					if !ok {
-						valid_pair = false
-						break
+		i := 0
+		for i < len(line) {
+			switch line[i] {
+			case 'd':
+				// Check for "do()" or "don't()"
+				if i + 3 < len(line) && line[i:i + 3] == "do(" {
+					append(&instructions, memory_instruction{condition = true, is_do = true})
+					i += 4
+				} else if i + 6 < len(line) && line[i:i + 6] == "don't(" {
+					append(&instructions, memory_instruction{condition = true, is_do = false})
+					i += 7
+				} else {
+					i += 1
+				}
+			case 'm':
+				// Check for "mul("
+				if i + 3 < len(line) && line[i:i + 4] == "mul(" {
+					i += 4
+					num1, num2: int
+					ok: bool
+					i, num1, num2, ok = parse_multiplication(line, i)
+					if ok {
+						append(
+							&instructions,
+							memory_instruction{condition = false, mul = [2]int{num1, num2}},
+						)
 					}
-					number_pair[i] = num
+				} else {
+					i += 1
 				}
-				if valid_pair {
-					append(&instructions, memory_instruction{condtion = false, mul = number_pair})
-				}
+			case:
+				i += 1
 			}
-
-			remaining = remaining[start + 4:] // keep the rest of the string for the next iteration
 		}
 	}
 	return

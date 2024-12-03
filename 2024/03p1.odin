@@ -24,40 +24,62 @@ get_sum_of_multiplications :: proc(lines: []string) -> int {
 
 parse_corrupted_memory :: proc(corrupted_memory: []string) -> (number_pairs: [dynamic][2]int) {
 	for line in corrupted_memory {
-		remaining := line
-		for len(remaining) > 0 {
-			start := strings.index(remaining, "mul(")
-			if start == -1 {
-				break
-			}
-
-			start += 4 // skip over "mul("
-			end := strings.index(remaining[start:], ")")
-			if end == -1 {
-				break
-			}
-
-			pair := strings.split(remaining[start:start + end], ",", context.temp_allocator)
-
-			// make sure only two values were found
-			if len(pair) == 2 {
-				number_pair := [2]int{}
-				valid_pair := true
-				for str, i in pair {
-					num, ok := strconv.parse_int(str)
-					if !ok {
-						valid_pair = false
-						break
+		i := 0
+		for i < len(line) {
+			if line[i] == 'm' {
+				// Check for "mul("
+				if i + 3 < len(line) && line[i:i + 4] == "mul(" {
+					i += 4
+					num1, num2: int
+					ok: bool
+					i, num1, num2, ok = parse_multiplication(line, i)
+					if ok {
+						append(&number_pairs, [2]int{num1, num2})
 					}
-					number_pair[i] = num
+				} else {
+					i += 1
 				}
-				if valid_pair {
-					append(&number_pairs, number_pair)
-				}
+			} else {
+				i += 1
 			}
-
-			remaining = remaining[start + 4:] // keep the rest of the string for the next iteration
 		}
 	}
-	return number_pairs
+	return
+}
+
+parse_multiplication :: proc(
+	line: string,
+	start: int,
+) -> (
+	new_pos: int,
+	num1: int,
+	num2: int,
+	ok: bool,
+) {
+	// Parse first number
+	i := start
+	num_start := i
+	for i < len(line) && (line[i] >= '0' && line[i] <= '9') {
+		i += 1
+	}
+	if i == num_start {return i, 0, 0, false}
+	num1 = strconv.parse_int(line[num_start:i]) or_return
+
+	// Expect comma
+	if i >= len(line) || line[i] != ',' {return i, 0, 0, false}
+	i += 1
+
+	// Parse second number
+	num_start = i
+	for i < len(line) && (line[i] >= '0' && line[i] <= '9') {
+		i += 1
+	}
+	if i == num_start {return i, 0, 0, false}
+	num2 = strconv.parse_int(line[num_start:i]) or_return
+
+	// Expect closing parenthesis
+	if i >= len(line) || line[i] != ')' {return i, 0, 0, false}
+	i += 1
+
+	return i, num1, num2, true
 }
