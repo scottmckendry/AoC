@@ -4,24 +4,76 @@ import "core:fmt"
 import "core:strconv"
 import "core:strings"
 
+memory_instruction :: struct {
+	condtion: bool,
+	is_do:    bool,
+	mul:      [2]int,
+}
+
 D03P2 :: proc() {
 	input_string := #load("inputs/03.txt", string)
 	lines := strings.split(input_string, "\n", context.temp_allocator)
 
-	sum_of_multiplications := get_sum_of_multiplications(lines, true)
+	sum_of_multiplications := get_sum_of_cond_multiplications(lines)
 	fmt.printf("Sum of all multiplications: %d\n", sum_of_multiplications)
 }
 
+get_sum_of_cond_multiplications :: proc(lines: []string) -> int {
+	instructions := parse_memory_instructions(lines)
+	defer delete(instructions)
+	doing := true
+	sum := 0
+	for instruction in instructions {
+		if instruction.condtion {
+			if instruction.is_do {
+				doing = true
+			} else {
+				doing = false
+			}
+			continue
+		}
 
-parse_corrupted_memory_pt2 :: proc(corrupted_memory: []string) -> (number_pairs: [dynamic][2]int) {
-	can_do := true
-	for line in corrupted_memory {
+		if doing {
+			sum += instruction.mul[0] * instruction.mul[1]
+		}
+	}
+	return sum
+}
+
+parse_memory_instructions :: proc(lines: []string) -> (instructions: [dynamic]memory_instruction) {
+	for line in lines {
 		remaining := line
 		for len(remaining) > 0 {
+			mul_index := strings.index(remaining, "mul(")
+			do_index := strings.index(remaining, "do()")
+			dont_index := strings.index(remaining, "don't()")
 
-			start := strings.index(remaining, "mul(")
-			if start == -1 {
+			if mul_index == -1 {
+				mul_index = 9999
+			}
+			if do_index == -1 {
+				do_index = 9999
+			}
+			if dont_index == -1 {
+				dont_index = 9999
+			}
+
+			// check if there are no remaining instructions or get the nearest instruction
+			start := min(mul_index, do_index, dont_index)
+			if start == 9999 {
 				break
+			}
+
+			if start == do_index {
+				append(&instructions, memory_instruction{condtion = true, is_do = true})
+				remaining = remaining[start + 4:]
+				continue
+			}
+
+			if start == dont_index {
+				append(&instructions, memory_instruction{condtion = true, is_do = false})
+				remaining = remaining[start + 7:]
+				continue
 			}
 
 			start += 4 // skip over "mul("
@@ -34,14 +86,6 @@ parse_corrupted_memory_pt2 :: proc(corrupted_memory: []string) -> (number_pairs:
 
 			// make sure only two values were found
 			if len(pair) == 2 {
-				condition_index, is_do := get_next_condition(remaining, start)
-				if condition_index != -1 {
-					// make sure the condition is before the current pair if it needs to be applied
-					if condition_index < start {
-						can_do = is_do
-					}
-				}
-
 				number_pair := [2]int{}
 				valid_pair := true
 				for str, i in pair {
@@ -52,40 +96,13 @@ parse_corrupted_memory_pt2 :: proc(corrupted_memory: []string) -> (number_pairs:
 					}
 					number_pair[i] = num
 				}
-				if valid_pair && can_do {
-					append(&number_pairs, number_pair)
+				if valid_pair {
+					append(&instructions, memory_instruction{condtion = false, mul = number_pair})
 				}
 			}
 
 			remaining = remaining[start + 4:] // keep the rest of the string for the next iteration
 		}
 	}
-	return number_pairs
-}
-
-get_next_condition :: proc(remaining: string, mul_position: int) -> (index: int, is_do: bool) {
-	// Look only at the substring before the mul() position
-	search_area := remaining[:mul_position]
-
-	do_index := strings.last_index(search_area, "do()")
-	dont_index := strings.last_index(search_area, "don't()")
-
-	if do_index == -1 && dont_index == -1 {
-		return -1, false
-	}
-
-	if do_index == -1 {
-		return dont_index, false
-	}
-
-	if dont_index == -1 {
-		return do_index, true
-	}
-
-	// Return the one that appears last (closest to mul)
-	if do_index > dont_index {
-		return do_index, true
-	}
-
-	return dont_index, false
+	return
 }

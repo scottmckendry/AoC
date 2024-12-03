@@ -8,17 +8,13 @@ D03P1 :: proc() {
 	input_string := #load("inputs/03.txt", string)
 	lines := strings.split(input_string, "\n", context.temp_allocator)
 
-	sum_of_multiplications := get_sum_of_multiplications(lines, false)
+	sum_of_multiplications := get_sum_of_multiplications(lines)
 	fmt.printf("Sum of all multiplications: %d\n", sum_of_multiplications)
 }
 
-get_sum_of_multiplications :: proc(lines: []string, parse_conditionals: bool) -> int {
-	number_pairs: [dynamic][2]int
-	if !parse_conditionals {
-		number_pairs = parse_corrupted_memory(lines)
-	} else {
-		number_pairs = parse_corrupted_memory_pt2(lines)
-	}
+get_sum_of_multiplications :: proc(lines: []string) -> int {
+	number_pairs := parse_corrupted_memory(lines)
+	defer delete(number_pairs)
 	sum := 0
 	for pair in number_pairs {
 		sum += pair[0] * pair[1]

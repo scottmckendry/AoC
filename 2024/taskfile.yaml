@@ -15,6 +15,7 @@ tasks:
             - cmd: clear
             - cmd: "{{.CU}}cp ./tests/*.odin ."
               silent: true
+            - defer: { task: clean }
             - cmd: odin test . -vet -strict-style
 
     test:
