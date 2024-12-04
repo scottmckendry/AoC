@@ -3,6 +3,10 @@ package main
 import "core:fmt"
 import "core:strings"
 
+direction :: struct {
+	dx, dy: int,
+}
+
 D04P1 :: proc() {
 	input_string := #load("inputs/04.txt", string)
 	lines := strings.split(input_string, "\n", context.temp_allocator)
@@ -14,86 +18,47 @@ D04P1 :: proc() {
 }
 
 get_total_xmas_words :: proc(word_search: []string) -> int {
-	total_xmas_words := 0
-	// horizontal lines
-	for line in word_search {
-		total_xmas_words += count_matches(line, "XMAS")
+	directions := []direction {
+		{0, 1}, // horizontal
+		{1, 0}, // vertical
+		{1, 1}, // diagonal top-left to bottom-right
+		{1, -1}, // diagonal top-right to bottom-left
 	}
 
-	// vertical lines
-	for i in 0 ..< len(word_search[0]) {
-		vertical_line: [dynamic]u8
-		defer delete(vertical_line)
-		for line in word_search {
-			append(&vertical_line, line[i])
-		}
-		total_xmas_words += count_matches(transmute(string)vertical_line[:], "XMAS")
-	}
+	total := 0
+	height := len(word_search)
+	width := len(word_search[0])
 
-	// Diagonal lines (top-left to bottom-right)
-	for k in 0 ..< len(word_search[0]) {
-		diagonal_line: [dynamic]u8
-		defer delete(diagonal_line)
-		row, col := 0, k
-		for row < len(word_search) && col < len(word_search[0]) {
-			append(&diagonal_line, word_search[row][col])
-			row += 1
-			col += 1
-		}
-		total_xmas_words += count_matches(transmute(string)diagonal_line[:], "XMAS")
-	}
-	for i in 1 ..< len(word_search) {
-		diagonal_line: [dynamic]u8
-		defer delete(diagonal_line)
-		row, col := i, 0
-		for row < len(word_search) && col < len(word_search[0]) {
-			append(&diagonal_line, word_search[row][col])
-			row += 1
-			col += 1
-		}
-		total_xmas_words += count_matches(transmute(string)diagonal_line[:], "XMAS")
-	}
+	for dir in directions {
+		for y in 0 ..< height {
+			for x in 0 ..< width {
+				// check bounds for space to fit "XMAS"
+				diff_x, diff_y := dir.dx * 3, dir.dy * 3
+				if x + diff_x >= width ||
+				   x + diff_x < 0 ||
+				   y + diff_y >= height ||
+				   y + diff_y < 0 {
+					continue
+				}
 
-	// Diagonal lines (top-right to bottom-left)
-	for k in 0 ..< len(word_search[0]) {
-		diagonal_line: [dynamic]u8
-		defer delete(diagonal_line)
-		row, col := 0, k
-		for row < len(word_search) && col >= 0 {
-			append(&diagonal_line, word_search[row][col])
-			row += 1
-			col -= 1
-		}
-		total_xmas_words += count_matches(transmute(string)diagonal_line[:], "XMAS")
-	}
-	for i in 1 ..< len(word_search) {
-		diagonal_line: [dynamic]u8
-		defer delete(diagonal_line)
-		row, col := i, len(word_search[0]) - 1
-		for row < len(word_search) && col >= 0 {
-			append(&diagonal_line, word_search[row][col])
-			row += 1
-			col -= 1
-		}
-		total_xmas_words += count_matches(transmute(string)diagonal_line[:], "XMAS")
-	}
+				// check forwards first
+				if word_search[y][x] == 'X' &&
+				   word_search[y + dir.dy][x + dir.dx] == 'M' &&
+				   word_search[y + dir.dy * 2][x + dir.dx * 2] == 'A' &&
+				   word_search[y + dir.dy * 3][x + dir.dx * 3] == 'S' {
+					total += 1
+					continue
+				}
 
-	return total_xmas_words
-}
-
-count_matches :: proc(search_string: string, word: string) -> int {
-	count := 0
-	reversed := strings.reverse(search_string, context.temp_allocator)
-
-	for _, i in 0 ..< len(search_string) {
-		if strings.has_prefix(search_string[i:], word) {
-			count += 1
-		}
-
-		if strings.has_prefix(reversed[i:], word) {
-			count += 1
+				// and then check backwards
+				if word_search[y][x] == 'S' &&
+				   word_search[y + dir.dy][x + dir.dx] == 'A' &&
+				   word_search[y + dir.dy * 2][x + dir.dx * 2] == 'M' &&
+				   word_search[y + dir.dy * 3][x + dir.dx * 3] == 'X' {
+					total += 1
+				}
+			}
 		}
 	}
-
-	return count
+	return total
 }
