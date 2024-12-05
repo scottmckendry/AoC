@@ -19,6 +19,8 @@ solutions: map[string]proc() = {
 	"03P2:Mull It Over"       = D03P2,
 	"04P1:Ceres Search"       = D04P1,
 	"04P2:Ceres Search"       = D04P2,
+	"05P1:Print Queue"        = D05P1,
+	"05P2:Print Queue"        = D05P2,
 }
 
 main :: proc() {
