@@ -21,6 +21,8 @@ solutions: map[string]proc() = {
 	"04P2:Ceres Search"       = D04P2,
 	"05P1:Print Queue"        = D05P1,
 	"05P2:Print Queue"        = D05P2,
+	"06P1:Guard Gallivant"    = D06P1,
+	"06P2:Guard Gallivant"    = D06P2,
 }
 
 main :: proc() {
