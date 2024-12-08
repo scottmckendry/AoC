@@ -58,28 +58,29 @@ get_solution_stats :: proc(solutions: map[string]proc()) -> []solution_stat {
 		i_stat += 1
 	}
 
-	run_once := []string{"06P2:Guard Gallivant"}
-
 	slice.sort(ordered_keys)
 
 	for key, i in ordered_keys {
 		solution := solutions[key]
 		sum_ex_time := time.Duration(0)
-		if slice.contains(run_once, key) {
+		for j := 0; j < 10; j += 1 {
 			sum_ex_time += benchmark(solution)
+		}
+
+		exec_time := time.Duration(sum_ex_time / 10)
+		if sum_ex_time / 10 >= time.Second {
+			exec_time = time.duration_round(sum_ex_time / 10, time.Millisecond * 100) // round to nearest .1 second for >1s
+		} else if sum_ex_time / 10 >= time.Millisecond {
+			exec_time = time.duration_round(sum_ex_time / 10, time.Microsecond * 100) // round to nearest .1 millisecond for >1ms
 		} else {
-			for j := 0; j < 10; j += 1 {
-				sum_ex_time += benchmark(solution)
-			}
+			exec_time = time.duration_round(sum_ex_time / 10, time.Microsecond) // round to nearest microsecond for <1ms
 		}
 
 		stats[i] = solution_stat {
 			name           = strings.split(key, ":", context.temp_allocator)[1],
 			day            = strings.split(key, ":", context.temp_allocator)[0][0:2],
 			part           = strings.split(key, ":", context.temp_allocator)[0][3:4],
-			execution_time = time.Duration(
-				time.duration_round((sum_ex_time / 10), time.Microsecond),
-			),
+			execution_time = time.Duration(exec_time),
 		}
 	}
 
