@@ -23,6 +23,8 @@ solutions: map[string]proc() = {
 	"05P2:Print Queue"        = D05P2,
 	"06P1:Guard Gallivant"    = D06P1,
 	"06P2:Guard Gallivant"    = D06P2,
+	"07P1:Bridge Repair"      = D07P1,
+	"07P2:Bridge Repair"      = D07P2,
 }
 
 main :: proc() {
