@@ -11,20 +11,22 @@ import "utils"
 year :: "2024"
 
 solutions: map[string]proc() = {
-	"01P1:Historian Hysteria" = D01P1,
-	"01P2:Historian Hysteria" = D01P2,
-	"02P1:Red-Nosed Reports"  = D02P1,
-	"02P2:Red-Nosed Reports"  = D02P2,
-	"03P1:Mull It Over"       = D03P1,
-	"03P2:Mull It Over"       = D03P2,
-	"04P1:Ceres Search"       = D04P1,
-	"04P2:Ceres Search"       = D04P2,
-	"05P1:Print Queue"        = D05P1,
-	"05P2:Print Queue"        = D05P2,
-	"06P1:Guard Gallivant"    = D06P1,
-	"06P2:Guard Gallivant"    = D06P2,
-	"07P1:Bridge Repair"      = D07P1,
-	"07P2:Bridge Repair"      = D07P2,
+	"01P1:Historian Hysteria"    = D01P1,
+	"01P2:Historian Hysteria"    = D01P2,
+	"02P1:Red-Nosed Reports"     = D02P1,
+	"02P2:Red-Nosed Reports"     = D02P2,
+	"03P1:Mull It Over"          = D03P1,
+	"03P2:Mull It Over"          = D03P2,
+	"04P1:Ceres Search"          = D04P1,
+	"04P2:Ceres Search"          = D04P2,
+	"05P1:Print Queue"           = D05P1,
+	"05P2:Print Queue"           = D05P2,
+	"06P1:Guard Gallivant"       = D06P1,
+	"06P2:Guard Gallivant"       = D06P2,
+	"07P1:Bridge Repair"         = D07P1,
+	"07P2:Bridge Repair"         = D07P2,
+	"08P1:Resonant Collinearity" = D08P1,
+	"08P2:Resonant Collinearity" = D08P2,
 }
 
 main :: proc() {
