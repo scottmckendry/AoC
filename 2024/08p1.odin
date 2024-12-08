@@ -18,7 +18,7 @@ D08P1 :: proc() {
 
 get_antinode_count :: proc(lines: []string) -> int {
     antennas := parse_antennas(lines)
-    antinodes := [dynamic]vec2{}
+    antinodes := make(map[vec2]bool)
     defer {
         for _, antennas_at_frequency in antennas {
             delete(antennas_at_frequency)
@@ -34,7 +34,7 @@ get_antinode_count :: proc(lines: []string) -> int {
     for _, antennas_at_frequency in antennas {
         for antenna1, i in antennas_at_frequency {
             for antenna2, j in antennas_at_frequency {
-                if i == j {
+                if i >= j { // skip duplicate pairs
                     continue
                 }
 
@@ -55,18 +55,17 @@ get_antinode_count :: proc(lines: []string) -> int {
     return len(antinodes)
 }
 
-check_antinode :: proc(antinodes: ^[dynamic]vec2, antinode: vec2, max_x: int, max_y: int) -> bool {
+check_antinode :: proc(antinodes: ^map[vec2]bool, antinode: vec2, max_x: int, max_y: int) -> bool {
     if antinode.x < 0 || antinode.x >= max_x || antinode.y < 0 || antinode.y >= max_y {
         return false
     }
 
-    for existing in antinodes^ {
-        if existing.x == antinode.x && existing.y == antinode.y {
-            return true
-        }
+    _, found := antinodes^[antinode]
+    if found {
+        return true
     }
 
-    append(antinodes, antinode)
+    antinodes[antinode] = true
 
     return true
 }

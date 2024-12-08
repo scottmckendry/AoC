@@ -13,7 +13,7 @@ D08P2 :: proc() {
 
 get_antinode_count_p2 :: proc(lines: []string) -> int {
 	antennas := parse_antennas(lines)
-	antinodes := [dynamic]vec2{}
+	antinodes := make(map[vec2]bool)
 	defer {
 		for _, antennas_at_frequency in antennas {
 			delete(antennas_at_frequency)
@@ -29,7 +29,7 @@ get_antinode_count_p2 :: proc(lines: []string) -> int {
 	for _, antennas_at_frequency in antennas {
 		for antenna1, i in antennas_at_frequency {
 			for antenna2, j in antennas_at_frequency {
-				if i == j {
+				if i >= j { 	// skip duplicate pairs
 					continue
 				}
 
@@ -39,27 +39,14 @@ get_antinode_count_p2 :: proc(lines: []string) -> int {
 					antenna2.position.y - antenna1.position.y,
 				}
 
-				// simplify the vector (if possible) e.g. (1, 2) -> (1, 2), (2, 4) -> (1, 2)
-				vec = simplify_vector(vec)
-
-				// first check all valid antinodes by adding the vector to the first antenna
-				in_bounds := true
-				pos := vec2{antenna1.position.x + vec.x, antenna1.position.y + vec.y}
-				for in_bounds {
-					in_bounds = check_antinode(&antinodes, pos, max_x, max_y)
-					pos.x += vec.x
-					pos.y += vec.y
-				}
-
-				// then check all valid antinodes by subtracting the vector from the second antenna 
-				// this ensures that any nodes inbetween the two antennas are counted
-				in_bounds = true
-				pos = vec2{antenna2.position.x, antenna2.position.y}
-				for in_bounds {
-					in_bounds = check_antinode(&antinodes, pos, max_x, max_y)
-					pos.x -= vec.x
-					pos.y -= vec.y
-				}
+				check_antinode_direction(antenna1.position, vec, &antinodes, max_x, max_y)
+				check_antinode_direction(
+					antenna2.position,
+					vec2{-vec.x, -vec.y},
+					&antinodes,
+					max_x,
+					max_y,
+				)
 			}
 		}
 	}
@@ -67,25 +54,15 @@ get_antinode_count_p2 :: proc(lines: []string) -> int {
 	return len(antinodes)
 }
 
-simplify_vector :: proc(vec: vec2) -> vec2 {
-	vec_copy := vec
-	// find the greatest common divisor of the vector components
-	gcd := find_gcd(vec.x, vec.y)
-
-	// simplify the vector
-	vec_copy.x /= gcd
-	vec_copy.y /= gcd
-
-	return vec
-}
-
-find_gcd :: proc(a, b: int) -> int {
-	a_copy := a
-	b_copy := b
-
-	for b_copy != 0 {
-		a_copy, b_copy = b_copy, a_copy % b_copy
+check_antinode_direction :: proc(
+	start: vec2,
+	vec: vec2,
+	antinodes: ^map[vec2]bool,
+	max_x, max_y: int,
+) {
+	pos := start
+	for check_antinode(antinodes, pos, max_x, max_y) {
+		pos.x += vec.x
+		pos.y += vec.y
 	}
-
-	return a
 }
