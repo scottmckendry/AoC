@@ -92,18 +92,9 @@ apply_operator :: proc(
 	}
 
 	if include_concat {
-		buf: [16]byte
-		str_current := strconv.itoa(buf[:], current_value)
-		buf2: [16]byte
-		str_next := strconv.itoa(buf2[:], remaining_operands[0])
-
-		concatted := strconv.atoi(
-			strings.concatenate({str_current, str_next}, context.temp_allocator),
-		)
-
 		concat_result := apply_operator(
 			calibration,
-			concatted,
+			concat_ints(current_value, remaining_operands[0]),
 			remaining_operands[1:],
 			include_concat,
 		)
@@ -112,5 +103,23 @@ apply_operator :: proc(
 		}
 	}
 
+	return
+}
+
+
+concat_ints :: proc(a: int, b: int) -> (result: int) {
+	b_digits := 1
+	b_copy := b
+	for b_copy >= 10 {
+		b_copy /= 10
+		b_digits += 1
+	}
+
+	result = a
+	for i := 0; i < b_digits; i += 1 {
+		result *= 10
+	}
+
+	result += b
 	return
 }
