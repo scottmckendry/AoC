@@ -16,41 +16,40 @@ D06P2 :: proc() {
 }
 
 get_loop_causing_obstacles :: proc(lines: []string) -> int {
-	original_map, guard_position, max_x, max_y := parse_lab_map(lines)
+	lab_map, guard_position, max_x, max_y := parse_lab_map(lines)
 	_, positions_to_check := get_unique_guard_positions(lines)
-	defer delete(original_map)
+	defer delete(lab_map)
 	defer delete(positions_to_check)
 
 	loop_count := 0
 
-	// place a obstable at each possible position, and check if it causes a loop
+	prev_position: vec2
 	for position in positions_to_check {
 		if (position.x == guard_position.x && position.y == guard_position.y) {
 			continue
 		}
 
-		// create a new map and copy all entries
-		lab_map := make(map[vec2]lab_map_coord)
-		for k, v in original_map {
-			lab_map[k] = v
-		}
-		defer delete(lab_map)
+		// un-toggle previous obstacle
+		coord := lab_map[prev_position]
+		coord.is_obstacle = false
+		lab_map[prev_position] = coord
 
-		// update the new position
-		coord_to_update := lab_map[position]
-		coord_to_update.is_obstacle = true
-		lab_map[position] = coord_to_update
+		// toggle current obstacle
+		coord = lab_map[position]
+		coord.is_obstacle = true
+		lab_map[position] = coord
 
-		if check_for_loop(lab_map, guard_position, max_x, max_y) {
+		if check_for_loop(&lab_map, guard_position, max_x, max_y) {
 			loop_count += 1
 		}
-	}
 
+		prev_position = position
+	}
 	return loop_count
 }
 
 check_for_loop :: proc(
-	lab_map: map[vec2]lab_map_coord,
+	lab_map: ^map[vec2]lab_map_coord,
 	guard_position: vec2,
 	max_x, max_y: int,
 ) -> bool {
