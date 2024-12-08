@@ -58,13 +58,19 @@ get_solution_stats :: proc(solutions: map[string]proc()) -> []solution_stat {
 		i_stat += 1
 	}
 
+	run_once := []string{"06P2:Guard Gallivant"}
+
 	slice.sort(ordered_keys)
 
 	for key, i in ordered_keys {
 		solution := solutions[key]
 		sum_ex_time := time.Duration(0)
-		for j := 0; j < 10; j += 1 {
+		if slice.contains(run_once, key) {
 			sum_ex_time += benchmark(solution)
+		} else {
+			for j := 0; j < 10; j += 1 {
+				sum_ex_time += benchmark(solution)
+			}
 		}
 
 		stats[i] = solution_stat {
