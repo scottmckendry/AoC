@@ -16,17 +16,23 @@ D06P1 :: proc() {
 	input_string := #load("inputs/06.txt", string)
 	lines := strings.split(input_string, "\n", context.temp_allocator)
 
-	unique_guard_positions := get_unique_guard_positions(lines[:len(lines) - 1])
+	unique_guard_positions, throw_away := get_unique_guard_positions(lines[:len(lines) - 1])
+	delete(throw_away)
 	fmt.printf("Unique guard positions: %d\n", unique_guard_positions)
 }
 
-get_unique_guard_positions :: proc(lines: []string) -> int {
+get_unique_guard_positions :: proc(
+	lines: []string,
+) -> (
+	visited_count: int,
+	unique_positions: [dynamic]vec2,
+) {
 	lab_map, guard_position, max_x, max_y := parse_lab_map(lines)
 	defer delete(lab_map)
 
 	guard_direction := vec2{0, -1}
 
-	visited_count := 1
+	visited_count = 1
 
 	on_map := true
 	for on_map {
@@ -50,6 +56,7 @@ get_unique_guard_positions :: proc(lines: []string) -> int {
 			guard_position = next_position
 			if !lab_map[guard_position].visited {
 				visited_count += 1
+				append(&unique_positions, guard_position)
 				guard_map_coord := lab_map[guard_position]
 				guard_map_coord.visited = true
 				lab_map[guard_position] = guard_map_coord
@@ -72,7 +79,7 @@ get_unique_guard_positions :: proc(lines: []string) -> int {
 		}
 	}
 
-	return visited_count
+	return
 }
 
 parse_lab_map :: proc(

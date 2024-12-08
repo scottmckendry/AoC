@@ -3,7 +3,7 @@ package main
 import "core:fmt"
 import "core:strings"
 
-type_visited :: struct {
+position_state :: struct {
 	position, direction: vec2,
 }
 
@@ -17,33 +17,32 @@ D06P2 :: proc() {
 
 get_loop_causing_obstacles :: proc(lines: []string) -> int {
 	original_map, guard_position, max_x, max_y := parse_lab_map(lines)
+	_, positions_to_check := get_unique_guard_positions(lines)
 	defer delete(original_map)
+	defer delete(positions_to_check)
 
 	loop_count := 0
 
 	// place a obstable at each possible position, and check if it causes a loop
-	for y in 0 ..< max_y {
-		for x in 0 ..< max_x {
-			if original_map[vec2{x, y}].is_obstacle ||
-			   (x == guard_position.x && y == guard_position.y) {
-				continue
-			}
+	for position in positions_to_check {
+		if (position.x == guard_position.x && position.y == guard_position.y) {
+			continue
+		}
 
-			// create a new map and copy all entries
-			lab_map := make(map[vec2]lab_map_coord)
-			for k, v in original_map {
-				lab_map[k] = v
-			}
-			defer delete(lab_map)
+		// create a new map and copy all entries
+		lab_map := make(map[vec2]lab_map_coord)
+		for k, v in original_map {
+			lab_map[k] = v
+		}
+		defer delete(lab_map)
 
-			// update the new position
-			coord_to_update := lab_map[vec2{x, y}]
-			coord_to_update.is_obstacle = true
-			lab_map[vec2{x, y}] = coord_to_update
+		// update the new position
+		coord_to_update := lab_map[position]
+		coord_to_update.is_obstacle = true
+		lab_map[position] = coord_to_update
 
-			if check_for_loop(lab_map, guard_position, max_x, max_y) {
-				loop_count += 1
-			}
+		if check_for_loop(lab_map, guard_position, max_x, max_y) {
+			loop_count += 1
 		}
 	}
 
@@ -58,17 +57,13 @@ check_for_loop :: proc(
 	guard_direction := vec2{0, -1}
 	guard_pos := guard_position
 
-	Position_State :: struct {
-		pos: vec2,
-		dir: vec2,
-	}
-	visited_states := make(map[Position_State]bool)
+	visited_states := make(map[position_state]bool)
 	defer delete(visited_states)
 
 	on_map := true
 
 	for on_map {
-		current_state := Position_State{guard_pos, guard_direction}
+		current_state := position_state{guard_pos, guard_direction}
 		if visited_states[current_state] {
 			return true
 		}

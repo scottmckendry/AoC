@@ -18,7 +18,7 @@ d06p1 :: proc(t: ^testing.T) {
 		"......#...",
 	}
 	want := 41
-	got := get_unique_guard_positions(lab_map)
+	got, _ := get_unique_guard_positions(lab_map)
 	testing.expect(t, got == want, fmt.aprintf("Got: %v | Want: %v", got, want))
 
 	free_all()
