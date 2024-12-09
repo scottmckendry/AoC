@@ -1,7 +1,6 @@
 package main
 
 import "core:fmt"
-import "core:slice"
 import "core:strconv"
 import "core:strings"
 
@@ -82,7 +81,8 @@ defragment_disk_p2 :: proc(fragmented: ^[dynamic]disk_file) {
 					old_size := file.block_size
 
 					file.block_start = space.block_start
-					fragmented[j] = file
+					inject_at(fragmented, i + 1, file)
+					ordered_remove(fragmented, j + 1)
 
 					// create new free space where the file was
 					new_free := disk_file {
@@ -91,7 +91,7 @@ defragment_disk_p2 :: proc(fragmented: ^[dynamic]disk_file) {
 						block_start = old_start,
 						block_size  = old_size,
 					}
-					append(fragmented, new_free)
+					inject_at(fragmented, j + 1, new_free)
 
 					// resize or remove the destination free space block
 					if file.block_size == sz {
@@ -99,27 +99,18 @@ defragment_disk_p2 :: proc(fragmented: ^[dynamic]disk_file) {
 						// go back one step to avoid skipping a block
 						i -= 1
 					} else {
+						ordered_remove(fragmented, i)
 						new_space := disk_file {
 							is_file     = false,
 							file_id     = -1,
 							block_start = space.block_start + file.block_size,
 							block_size  = sz - file.block_size,
 						}
-						fragmented[i] = new_space
+						inject_at(fragmented, i + 1, new_space)
 					}
-
-					// sort after each move to maintain contiguous blocks
-					slice.sort_by(fragmented[:], proc(a, b: disk_file) -> bool {
-						return a.block_start < b.block_start
-					})
 					break
 				}
 			}
 		}
 	}
-
-	// final sort to ensure everything is in order
-	slice.sort_by(fragmented[:], proc(a, b: disk_file) -> bool {
-		return a.block_start < b.block_start
-	})
 }
