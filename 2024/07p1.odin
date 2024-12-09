@@ -4,7 +4,7 @@ import "core:fmt"
 import "core:strconv"
 import "core:strings"
 
-Equation :: struct {
+equation :: struct {
 	calibration: int,
 	equation:    [dynamic]int,
 }
@@ -37,15 +37,15 @@ get_sum_of_valid_calibrations :: proc(input: []string, include_concat: bool) -> 
 	return sum
 }
 
-parse_equations :: proc(equations: []string) -> (calibration_equations: [dynamic]Equation) {
-	for equation in equations {
-		if equation == "" {
+parse_equations :: proc(equations: []string) -> (calibration_equations: [dynamic]equation) {
+	for eq in equations {
+		if eq == "" {
 			continue
 		}
 
-		calibration_equation := Equation{}
+		calibration_equation := equation{}
 
-		parts := strings.split(equation, ": ", context.temp_allocator)
+		parts := strings.split(eq, ": ", context.temp_allocator)
 		calibration_equation.calibration = strconv.atoi(parts[0])
 
 		equation_parts := strings.split(parts[1], " ", context.temp_allocator)
@@ -67,28 +67,12 @@ apply_operator :: proc(
 ) -> (
 	is_valid: bool,
 ) {
+	if current_value > calibration {
+		return
+	}
+
 	if len(remaining_operands) == 0 {
 		return current_value == calibration
-	}
-
-	add_result := apply_operator(
-		calibration,
-		current_value + remaining_operands[0],
-		remaining_operands[1:],
-		include_concat,
-	)
-	if add_result {
-		return true
-	}
-
-	mult_result := apply_operator(
-		calibration,
-		current_value * remaining_operands[0],
-		remaining_operands[1:],
-		include_concat,
-	)
-	if mult_result {
-		return true
 	}
 
 	if include_concat {
@@ -103,9 +87,28 @@ apply_operator :: proc(
 		}
 	}
 
+	mult_result := apply_operator(
+		calibration,
+		current_value * remaining_operands[0],
+		remaining_operands[1:],
+		include_concat,
+	)
+	if mult_result {
+		return true
+	}
+
+	add_result := apply_operator(
+		calibration,
+		current_value + remaining_operands[0],
+		remaining_operands[1:],
+		include_concat,
+	)
+	if add_result {
+		return true
+	}
+
 	return
 }
-
 
 concat_ints :: proc(a: int, b: int) -> (result: int) {
 	b_digits := 1
