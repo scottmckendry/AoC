@@ -27,6 +27,8 @@ solutions: map[string]proc() = {
 	"07P2:Bridge Repair"         = D07P2,
 	"08P1:Resonant Collinearity" = D08P1,
 	"08P2:Resonant Collinearity" = D08P2,
+	"09P1:Disk Fragmenter"       = D09P1,
+	"09P2:Disk Fragmenter"       = D09P2,
 }
 
 main :: proc() {
