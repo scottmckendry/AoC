@@ -22,15 +22,15 @@ The same is true for Odin solutions, except the command to run the solution is `
 <!-- 2024TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Historian Hysteria](https://adventofcode.com/2024/day/1) | [206µs](2024/01p1.odin) | [232µs](2024/01p2.odin) | ⭐⭐ |
-| [Day 2: Red-Nosed Reports](https://adventofcode.com/2024/day/2) | [485µs](2024/02p1.odin) | [1.1ms](2024/02p2.odin) | ⭐⭐ |
-| [Day 3: Mull It Over](https://adventofcode.com/2024/day/3) | [103µs](2024/03p1.odin) | [97µs](2024/03p2.odin) | ⭐⭐ |
-| [Day 4: Ceres Search](https://adventofcode.com/2024/day/4) | [501µs](2024/04p1.odin) | [166µs](2024/04p2.odin) | ⭐⭐ |
-| [Day 5: Print Queue](https://adventofcode.com/2024/day/5) | [892µs](2024/05p1.odin) | [1.5ms](2024/05p2.odin) | ⭐⭐ |
-| [Day 6: Guard Gallivant](https://adventofcode.com/2024/day/6) | [3.6ms](2024/06p1.odin) | [648.3ms](2024/06p2.odin) | ⭐⭐ |
-| [Day 7: Bridge Repair](https://adventofcode.com/2024/day/7) | [1.6ms](2024/07p1.odin) | [27.7ms](2024/07p2.odin) | ⭐⭐ |
-| [Day 8: Resonant Collinearity](https://adventofcode.com/2024/day/8) | [203µs](2024/08p1.odin) | [419µs](2024/08p2.odin) | ⭐⭐ |
-| [Day 9: Disk Fragmenter](https://adventofcode.com/2024/day/9) | [1.6ms](2024/09p1.odin) | [3.8s](2024/09p2.odin) | ⭐⭐ |
+| [Day 1: Historian Hysteria](https://adventofcode.com/2024/day/1) | [171µs](2024/01p1.odin) | [237µs](2024/01p2.odin) | ⭐⭐ |
+| [Day 2: Red-Nosed Reports](https://adventofcode.com/2024/day/2) | [415µs](2024/02p1.odin) | [1ms](2024/02p2.odin) | ⭐⭐ |
+| [Day 3: Mull It Over](https://adventofcode.com/2024/day/3) | [57µs](2024/03p1.odin) | [60µs](2024/03p2.odin) | ⭐⭐ |
+| [Day 4: Ceres Search](https://adventofcode.com/2024/day/4) | [473µs](2024/04p1.odin) | [132µs](2024/04p2.odin) | ⭐⭐ |
+| [Day 5: Print Queue](https://adventofcode.com/2024/day/5) | [802µs](2024/05p1.odin) | [1.3ms](2024/05p2.odin) | ⭐⭐ |
+| [Day 6: Guard Gallivant](https://adventofcode.com/2024/day/6) | [3.5ms](2024/06p1.odin) | [638ms](2024/06p2.odin) | ⭐⭐ |
+| [Day 7: Bridge Repair](https://adventofcode.com/2024/day/7) | [1.5ms](2024/07p1.odin) | [27.7ms](2024/07p2.odin) | ⭐⭐ |
+| [Day 8: Resonant Collinearity](https://adventofcode.com/2024/day/8) | [205µs](2024/08p1.odin) | [421µs](2024/08p2.odin) | ⭐⭐ |
+| [Day 9: Disk Fragmenter](https://adventofcode.com/2024/day/9) | [1.6ms](2024/09p1.odin) | [434.4ms](2024/09p2.odin) | ⭐⭐ |
 <!-- 2024TableEnd -->
 
 ## 2023 (Go)
@@ -38,22 +38,22 @@ The same is true for Odin solutions, except the command to run the solution is `
 <!-- 2023TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1) | [396µs](2023/01p1.go) | [1.376ms](2023/01p2.go) | ⭐⭐ |
-| [Day 2: Cube Conundrum](https://adventofcode.com/2023/day/2) | [296µs](2023/02p1.go) | [239µs](2023/02p2.go) | ⭐⭐ |
-| [Day 3: Gear Ratios](https://adventofcode.com/2023/day/3) | [352µs](2023/03p1.go) | [1.74ms](2023/03p2.go) | ⭐⭐ |
-| [Day 4: Scratchcards](https://adventofcode.com/2023/day/4) | [3.15ms](2023/04p1.go) | [25.772ms](2023/04p2.go) | ⭐⭐ |
-| [Day 5: If You Give a Seed A Fertilizer](https://adventofcode.com/2023/day/5) | [520µs](2023/05p1.go) | [1.991ms](2023/05p2.go) | ⭐⭐ |
-| [Day 6: Wait For It](https://adventofcode.com/2023/day/6) | [23µs](2023/06p1.go) | [36µs](2023/06p2.go) | ⭐⭐ |
-| [Day 7: Camel Cards](https://adventofcode.com/2023/day/7) | [972µs](2023/07p1.go) | [1.027ms](2023/07p2.go) | ⭐⭐ |
-| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8) | [561µs](2023/08p1.go) | [2.597ms](2023/08p2.go) | ⭐⭐ |
-| [Day 9: Mirage Maintenance](https://adventofcode.com/2023/day/9) | [683µs](2023/09p1.go) | [721µs](2023/09p2.go) | ⭐⭐ |
-| [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10) | [6.537ms](2023/10p1.go) | [7.695ms](2023/10p2.go) | ⭐⭐ |
-| [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11) | [13.293ms](2023/11p1.go) | [16.494ms](2023/11p2.go) | ⭐⭐ |
-| [Day 12: Hot Springs](https://adventofcode.com/2023/day/12) | [2.09ms](2023/12p1.go) | [94.502ms](2023/12p2.go) | ⭐⭐ |
-| [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13) | [684µs](2023/13p1.go) | [64.567ms](2023/13p2.go) | ⭐⭐ |
-| [Day 14: Parabolic Reflector Dish](https://adventofcode.com/2023/day/14) | [6.477ms](2023/14p1.go) | [484.237ms](2023/14p2.go) | ⭐⭐ |
-| [Day 15: Lens Library](https://adventofcode.com/2023/day/15) | [151µs](2023/15p1.go) | [989µs](2023/15p2.go) | ⭐⭐ |
-| [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16) | [4.995ms](2023/16p1.go) | [862.334ms](2023/16p2.go) | ⭐⭐ |
+| [Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1) | [409µs](2023/01p1.go) | [1.398ms](2023/01p2.go) | ⭐⭐ |
+| [Day 2: Cube Conundrum](https://adventofcode.com/2023/day/2) | [319µs](2023/02p1.go) | [236µs](2023/02p2.go) | ⭐⭐ |
+| [Day 3: Gear Ratios](https://adventofcode.com/2023/day/3) | [333µs](2023/03p1.go) | [1.678ms](2023/03p2.go) | ⭐⭐ |
+| [Day 4: Scratchcards](https://adventofcode.com/2023/day/4) | [3.024ms](2023/04p1.go) | [27.697ms](2023/04p2.go) | ⭐⭐ |
+| [Day 5: If You Give a Seed A Fertilizer](https://adventofcode.com/2023/day/5) | [738µs](2023/05p1.go) | [2.02ms](2023/05p2.go) | ⭐⭐ |
+| [Day 6: Wait For It](https://adventofcode.com/2023/day/6) | [30µs](2023/06p1.go) | [31µs](2023/06p2.go) | ⭐⭐ |
+| [Day 7: Camel Cards](https://adventofcode.com/2023/day/7) | [1.029ms](2023/07p1.go) | [1.056ms](2023/07p2.go) | ⭐⭐ |
+| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8) | [529µs](2023/08p1.go) | [2.632ms](2023/08p2.go) | ⭐⭐ |
+| [Day 9: Mirage Maintenance](https://adventofcode.com/2023/day/9) | [625µs](2023/09p1.go) | [721µs](2023/09p2.go) | ⭐⭐ |
+| [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10) | [7.045ms](2023/10p1.go) | [7.244ms](2023/10p2.go) | ⭐⭐ |
+| [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11) | [11.515ms](2023/11p1.go) | [12.737ms](2023/11p2.go) | ⭐⭐ |
+| [Day 12: Hot Springs](https://adventofcode.com/2023/day/12) | [2.108ms](2023/12p1.go) | [92.177ms](2023/12p2.go) | ⭐⭐ |
+| [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13) | [508µs](2023/13p1.go) | [61.942ms](2023/13p2.go) | ⭐⭐ |
+| [Day 14: Parabolic Reflector Dish](https://adventofcode.com/2023/day/14) | [6.409ms](2023/14p1.go) | [482.768ms](2023/14p2.go) | ⭐⭐ |
+| [Day 15: Lens Library](https://adventofcode.com/2023/day/15) | [143µs](2023/15p1.go) | [933µs](2023/15p2.go) | ⭐⭐ |
+| [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16) | [5.12ms](2023/16p1.go) | [859.069ms](2023/16p2.go) | ⭐⭐ |
 
 <!-- 2023TableEnd -->
 
@@ -67,18 +67,18 @@ The same is true for Odin solutions, except the command to run the solution is `
 <!-- 2022TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | [192µs](2022/01p1.go) | [150µs](2022/01p2.go) | ⭐⭐ |
-| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | [198µs](2022/02p1.go) | [279µs](2022/02p2.go) | ⭐⭐ |
-| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [245µs](2022/03p1.go) | [225µs](2022/03p2.go) | ⭐⭐ |
-| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | [743µs](2022/04p1.go) | [638µs](2022/04p2.go) | ⭐⭐ |
-| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | [723µs](2022/05p1.go) | [749µs](2022/05p2.go) | ⭐⭐ |
-| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | [359µs](2022/06p1.go) | [2.033ms](2022/06p2.go) | ⭐⭐ |
-| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | [213µs](2022/07p1.go) | [180µs](2022/07p2.go) | ⭐⭐ |
-| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | [217µs](2022/08p1.go) | [1.236ms](2022/08p2.go) | ⭐⭐ |
-| [Day 9: Rope Bridge](https://adventofcode.com/2022/day/9) | [993µs](2022/09p1.go) | [1.717ms](2022/09p2.go) | ⭐⭐ |
-| [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | [31µs](2022/10p1.go) | [55µs](2022/10p2.go) | ⭐⭐ |
-| [Day 11: Monkey in the Middle](https://adventofcode.com/2022/day/11) | [89µs](2022/11p1.go) | [13.306ms](2022/11p2.go) | ⭐⭐ |
-| [Day 12: Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [3.755ms](2022/12p1.go) | [3.03ms](2022/12p2.go) | ⭐⭐ |
+| [Day 1: Calorie Counting](https://adventofcode.com/2022/day/1) | [242µs](2022/01p1.go) | [181µs](2022/01p2.go) | ⭐⭐ |
+| [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2) | [201µs](2022/02p1.go) | [216µs](2022/02p2.go) | ⭐⭐ |
+| [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [247µs](2022/03p1.go) | [142µs](2022/03p2.go) | ⭐⭐ |
+| [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4) | [707µs](2022/04p1.go) | [626µs](2022/04p2.go) | ⭐⭐ |
+| [Day 5: Supply Stacks](https://adventofcode.com/2022/day/5) | [651µs](2022/05p1.go) | [667µs](2022/05p2.go) | ⭐⭐ |
+| [Day 6: Tuning Trouble](https://adventofcode.com/2022/day/6) | [288µs](2022/06p1.go) | [2ms](2022/06p2.go) | ⭐⭐ |
+| [Day 7: No Space Left On Device](https://adventofcode.com/2022/day/7) | [181µs](2022/07p1.go) | [115µs](2022/07p2.go) | ⭐⭐ |
+| [Day 8: Treetop Tree House](https://adventofcode.com/2022/day/8) | [216µs](2022/08p1.go) | [1.266ms](2022/08p2.go) | ⭐⭐ |
+| [Day 9: Rope Bridge](https://adventofcode.com/2022/day/9) | [916µs](2022/09p1.go) | [1.65ms](2022/09p2.go) | ⭐⭐ |
+| [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | [29µs](2022/10p1.go) | [54µs](2022/10p2.go) | ⭐⭐ |
+| [Day 11: Monkey in the Middle](https://adventofcode.com/2022/day/11) | [88µs](2022/11p1.go) | [13.223ms](2022/11p2.go) | ⭐⭐ |
+| [Day 12: Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [3.604ms](2022/12p1.go) | [2.885ms](2022/12p2.go) | ⭐⭐ |
 
 <!-- 2022TableEnd -->
 
@@ -87,17 +87,17 @@ The same is true for Odin solutions, except the command to run the solution is `
 <!-- 2021TableStart -->
 | Day | Part 1 | Part 2 | Stars |
 | --- | --- | --- | --- |
-| [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1) | [101µs](2021/01p1.odin) | [210µs](2021/01p2.odin) | ⭐⭐ |
-| [Day 2: Dive!](https://adventofcode.com/2021/day/2) | [141µs](2021/02p1.odin) | [158µs](2021/02p2.odin) | ⭐⭐ |
-| [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3) | [55µs](2021/03p1.odin) | [369µs](2021/03p2.odin) | ⭐⭐ |
-| [Day 4: Giant Squid](https://adventofcode.com/2021/day/4) | [226µs](2021/04p1.odin) | [402µs](2021/04p2.odin) | ⭐⭐ |
-| [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5) | [23.446ms](2021/05p1.odin) | [39.279ms](2021/05p2.odin) | ⭐⭐ |
-| [Day 6: Lanternfish](https://adventofcode.com/2021/day/6) | [8µs](2021/06p1.odin) | [12µs](2021/06p2.odin) | ⭐⭐ |
-| [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7) | [308µs](2021/07p1.odin) | [609µs](2021/07p2.odin) | ⭐⭐ |
-| [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8) | [63µs](2021/08p1.odin) | [1.126ms](2021/08p2.odin) | ⭐⭐ |
-| [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9) | [141µs](2021/09p1.odin) | [2.822ms](2021/09p2.odin) | ⭐⭐ |
-| [Day 10: Syntax Scoring](https://adventofcode.com/2021/day/10) | [248µs](2021/10p1.odin) | [334µs](2021/10p2.odin) | ⭐⭐ |
-| [Day 11: Dumbo Octopus](https://adventofcode.com/2021/day/11) | [138µs](2021/11p1.odin) | [284µs](2021/11p2.odin) | ⭐⭐ |
-| [Day 12: Passage Pathfinding](https://adventofcode.com/2021/day/12) | [2.466ms](2021/12p1.odin) | [61.802ms](2021/12p2.odin) | ⭐⭐ |
-| [Day 13: Transparent Oragami](https://adventofcode.com/2021/day/13) | [462µs](2021/13p1.odin) | [1.572ms](2021/13p2.odin) | ⭐⭐ |
+| [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1) | [131µs](2021/01p1.odin) | [207µs](2021/01p2.odin) | ⭐⭐ |
+| [Day 2: Dive!](https://adventofcode.com/2021/day/2) | [137µs](2021/02p1.odin) | [107µs](2021/02p2.odin) | ⭐⭐ |
+| [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3) | [35µs](2021/03p1.odin) | [249µs](2021/03p2.odin) | ⭐⭐ |
+| [Day 4: Giant Squid](https://adventofcode.com/2021/day/4) | [119µs](2021/04p1.odin) | [247µs](2021/04p2.odin) | ⭐⭐ |
+| [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5) | [23.008ms](2021/05p1.odin) | [36.28ms](2021/05p2.odin) | ⭐⭐ |
+| [Day 6: Lanternfish](https://adventofcode.com/2021/day/6) | [10µs](2021/06p1.odin) | [21µs](2021/06p2.odin) | ⭐⭐ |
+| [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7) | [642µs](2021/07p1.odin) | [688µs](2021/07p2.odin) | ⭐⭐ |
+| [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8) | [64µs](2021/08p1.odin) | [1.178ms](2021/08p2.odin) | ⭐⭐ |
+| [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9) | [135µs](2021/09p1.odin) | [2.738ms](2021/09p2.odin) | ⭐⭐ |
+| [Day 10: Syntax Scoring](https://adventofcode.com/2021/day/10) | [241µs](2021/10p1.odin) | [323µs](2021/10p2.odin) | ⭐⭐ |
+| [Day 11: Dumbo Octopus](https://adventofcode.com/2021/day/11) | [104µs](2021/11p1.odin) | [237µs](2021/11p2.odin) | ⭐⭐ |
+| [Day 12: Passage Pathfinding](https://adventofcode.com/2021/day/12) | [2.202ms](2021/12p1.odin) | [53.918ms](2021/12p2.odin) | ⭐⭐ |
+| [Day 13: Transparent Oragami](https://adventofcode.com/2021/day/13) | [519µs](2021/13p1.odin) | [1.574ms](2021/13p2.odin) | ⭐⭐ |
 <!-- 2021TableEnd -->
