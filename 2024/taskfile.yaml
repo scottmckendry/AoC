@@ -16,14 +16,14 @@ tasks:
             - cmd: "{{.CU}}cp ./tests/*.odin ."
               silent: true
             - defer: { task: clean }
-            - cmd: odin test . -vet -strict-style
+            - cmd: odin test . -vet -strict-style -define:ODIN_TEST_FANCY=false
 
     test:
         cmds:
             - cmd: "{{.CU}}cp ./tests/*.odin ."
               silent: true
             - defer: { task: clean }
-            - cmd: odin test . -vet -strict-style
+            - cmd: odin test . -vet -strict-style -define:ODIN_TEST_FANCY=false
 
     bench:
         cmds:
@@ -37,6 +37,29 @@ tasks:
         cmds:
             - odin run . -- -solution={{.SOLUTION}} -benchmark
             - defer: { task: clean }
+
+    profile-*:
+        vars:
+            SOLUTION: "{{index .MATCH 0 | upper}}"
+        cmds:
+            - cmd: |
+                  sed -i '/\/\/ <PROFILE IMPORTS>/a\
+                  import "base:runtime"\
+                  import "core:prof/spall"\
+                  import "core:sync"' main.odin
+              silent: true
+            - odin build . -o:speed -define:PROFILE=true
+            - ./2024{{.EXE}} -benchmark -solution={{.SOLUTION}}
+            - defer: { task: clean-profile }
+
+    clean-profile:
+        cmds:
+            - cmd: |
+                  sed -i '/import.*runtime/d' main.odin
+                  sed -i '/import.*spall/d' main.odin
+                  sed -i '/import.*sync/d' main.odin
+              silent: true
+            - task: clean
 
     clean:
         cmds:

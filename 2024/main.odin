@@ -8,6 +8,9 @@ import "core:strconv"
 import "core:strings"
 import "utils"
 
+// don't remove this comment! ;)
+// <PROFILE IMPORTS>
+
 year :: "2024"
 
 solutions: map[string]proc() = {
@@ -35,7 +38,25 @@ solutions: map[string]proc() = {
 	"11P2:Plutonian Pebbles"     = D11P2,
 }
 
+PROFILE :: #config(PROFILE, false)
+when PROFILE {
+	spall_ctx: spall.Context
+	@(thread_local)
+	spall_buffer: spall.Buffer
+}
+
 main :: proc() {
+	when PROFILE {
+		spall_ctx = spall.context_create("aoc.spall")
+		defer spall.context_destroy(&spall_ctx)
+
+		buffer_backing := make([]u8, spall.BUFFER_DEFAULT_SIZE)
+		spall_buffer = spall.buffer_create(buffer_backing, u32(sync.current_thread_id()))
+		defer spall.buffer_destroy(&spall_ctx, &spall_buffer)
+
+		spall.SCOPED_EVENT(&spall_ctx, &spall_buffer, #procedure)
+	}
+
 	track: mem.Tracking_Allocator
 	mem.tracking_allocator_init(&track, context.allocator)
 	context.allocator = mem.tracking_allocator(&track)
@@ -162,4 +183,22 @@ update_readme :: proc() {
 	append(&new_content, ..readme[end:])
 
 	utils.write_lines("../README.md", new_content)
+}
+
+when PROFILE {
+	@(instrumentation_enter)
+	spall_enter :: proc "contextless" (
+		proc_address, call_site_return_address: rawptr,
+		loc: runtime.Source_Code_Location,
+	) {
+		spall._buffer_begin(&spall_ctx, &spall_buffer, "", "", loc)
+	}
+
+	@(instrumentation_exit)
+	spall_exit :: proc "contextless" (
+		proc_address, call_site_return_address: rawptr,
+		loc: runtime.Source_Code_Location,
+	) {
+		spall._buffer_end(&spall_ctx, &spall_buffer)
+	}
 }
