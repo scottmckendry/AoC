@@ -29,6 +29,8 @@ solutions: map[string]proc() = {
 	"08P2:Resonant Collinearity" = D08P2,
 	"09P1:Disk Fragmenter"       = D09P1,
 	"09P2:Disk Fragmenter"       = D09P2,
+	"10P1:Hoof It"               = D10P1,
+	"10P2:Hoof It"               = D10P2,
 }
 
 main :: proc() {
