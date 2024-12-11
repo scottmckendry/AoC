@@ -15,7 +15,6 @@ jobs:
             - uses: laytan/setup-odin@v2
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  release: dev-2024-11
             - name: Report
               run: |
                   odin report ./2021
@@ -35,7 +34,6 @@ jobs:
             - uses: laytan/setup-odin@v2
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  release: dev-2024-11
 
             - run: cd 2021 && task bench
             - run: cd 2022 && go build .

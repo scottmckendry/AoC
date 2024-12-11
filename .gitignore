@@ -26,3 +26,4 @@ go.work
 *.exe
 *.bin
 2024/.task/checksum
+2024/aoc.spall
