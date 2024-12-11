@@ -32,7 +32,7 @@ solutions: map[string]proc() = {
 	"10P1:Hoof It"               = D10P1,
 	"10P2:Hoof It"               = D10P2,
 	"11P1:Plutonian Pebbles"     = D11P1,
-	"11P1:Plutonian Pebbles"     = D11P2,
+	"11P2:Plutonian Pebbles"     = D11P2,
 }
 
 main :: proc() {
