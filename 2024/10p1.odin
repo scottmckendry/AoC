@@ -48,48 +48,46 @@ get_trailhead_score :: proc(
 ) -> int {
 	score := 0
 	queue := [dynamic]int{trailhead}
-	visited := map[int]bool {
-		trailhead = true,
+	visited := make([dynamic]bool, len(trailmap))
+	visited[trailhead] = true
+	defer {
+		delete(queue)
+		delete(visited)
 	}
-	defer delete(queue)
-	defer delete(visited)
 
 	for len(queue) > 0 {
 		coord := pop(&queue)
-
 		if part2 {
 			visited[coord] = true
 		}
+		curr_height := trailmap[coord]
 
-		neighbours := []int {
-			coord - 1, // left
-			coord + 1, // right
-			coord - map_width, // up
-			coord + map_width, // down
-		}
+		// Check all 4 directions
+		neighbours := []int{-1, 1, -map_width, map_width}
+		for offset in neighbours {
+			neighbour := coord + offset
 
-		for neighbour in neighbours {
-			if neighbour < 0 || neighbour >= len(trailmap) {
+			// Skip if out of bounds or crossing horizontal boundary
+			if neighbour < 0 ||
+			   neighbour >= len(trailmap) ||
+			   (offset == -1 && coord % map_width == 0) ||
+			   (offset == 1 && coord % map_width == map_width - 1) {
 				continue
 			}
-			if (coord % map_width == 0 && neighbour == coord - 1) ||
-			   (coord % map_width == map_width - 1 && neighbour == coord + 1) {
+
+			// Skip if not exactly one height higher or already visited
+			if trailmap[neighbour] != curr_height + 1 || (!part2 && visited[neighbour]) {
 				continue
 			}
-			if trailmap[neighbour] - 1 != trailmap[coord] {
-				continue
-			}
-			if !part2 && visited[neighbour] {
-				continue
-			}
+
 			if trailmap[neighbour] == 9 {
 				score += 1
 				if !part2 {
 					visited[neighbour] = true
 				}
-				continue
+			} else {
+				append(&queue, neighbour)
 			}
-			append(&queue, neighbour)
 		}
 	}
 	return score
