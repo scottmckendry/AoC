@@ -31,6 +31,8 @@ solutions: map[string]proc() = {
 	"09P2:Disk Fragmenter"       = D09P2,
 	"10P1:Hoof It"               = D10P1,
 	"10P2:Hoof It"               = D10P2,
+	"11P1:Plutonian Pebbles"     = D11P1,
+	"11P1:Plutonian Pebbles"     = D11P2,
 }
 
 main :: proc() {
