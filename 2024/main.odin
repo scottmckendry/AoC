@@ -36,6 +36,8 @@ solutions: map[string]proc() = {
 	"10P2:Hoof It"               = D10P2,
 	"11P1:Plutonian Pebbles"     = D11P1,
 	"11P2:Plutonian Pebbles"     = D11P2,
+	"12P1:Garden Groups"         = D12P1,
+	"12P2:Garden Groups"         = D12P2,
 }
 
 PROFILE :: #config(PROFILE, false)
