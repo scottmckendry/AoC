@@ -40,6 +40,8 @@ solutions: map[string]proc() = {
 	"12P2:Garden Groups"         = D12P2,
 	"13P1:Claw Contraption"      = D13P1,
 	"13P2:Claw Contraption"      = D13P2,
+	"14P1:Restroom Redoubt"      = D14P1,
+	"14P2:Restroom Redoubt"      = D14P2,
 }
 
 PROFILE :: #config(PROFILE, false)
