@@ -1,7 +1,6 @@
 package main
 
 import "core:fmt"
-import "core:log"
 import "core:strconv"
 import "core:strings"
 
@@ -51,7 +50,6 @@ calculate_safety_factor :: proc(lines: []string, bounds: vec2) -> int {
 		}
 	}
 
-	log.info(quadrants)
 	return quadrants[0] * quadrants[1] * quadrants[2] * quadrants[3]
 }
 
