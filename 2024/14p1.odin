@@ -2,7 +2,6 @@ package main
 
 import "core:fmt"
 import "core:log"
-import "core:math"
 import "core:strconv"
 import "core:strings"
 
@@ -83,26 +82,9 @@ parse_robots :: proc(input: []string) -> (robots: [dynamic]robot) {
 }
 
 apply_robot_velocity :: proc(r: ^robot, seconds: int, bounds: vec2) {
-	for _ in 0 ..< seconds {
-		r.pos.x += r.vel.x
-		r.pos.y += r.vel.y
+	r.pos.x += r.vel.x * seconds
+	r.pos.y += r.vel.y * seconds
 
-		// if a wall is hit, teleport to the other side
-		if r.pos.y < 0 {
-			diff := math.abs(r.pos.y)
-			r.pos.y = bounds.y - diff + 1
-		}
-		if r.pos.y > bounds.y {
-			diff := r.pos.y - bounds.y
-			r.pos.y = diff - 1
-		}
-		if r.pos.x < 0 {
-			diff := math.abs(r.pos.x)
-			r.pos.x = bounds.x - diff + 1
-		}
-		if r.pos.x > bounds.x {
-			diff := r.pos.x - bounds.x
-			r.pos.x = diff - 1
-		}
-	}
+	r.pos.x = ((r.pos.x % (bounds.x + 1)) + (bounds.x + 1)) % (bounds.x + 1)
+	r.pos.y = ((r.pos.y % (bounds.y + 1)) + (bounds.y + 1)) % (bounds.y + 1)
 }
